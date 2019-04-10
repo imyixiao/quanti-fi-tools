@@ -1,3 +1,4 @@
+import { RetirementAccountsInfoInterface } from './../../budget/types';
 import { ExpensesInfoInterface } from 'src/budget/types';
 import { AppState } from '../store';
 import { createSelector } from 'reselect';
@@ -47,6 +48,13 @@ export const getTotalIncome = createSelector(
     },
 );
 
+export const getCompensation = createSelector(
+    getIncomeInfo,
+    incomeInfo => {
+        return round(incomeInfo.salary) + round(incomeInfo.bonus);
+    },
+);
+
 export const getWage = createSelector(
     getIncomeInfo,
     incomeInfo => {
@@ -71,6 +79,18 @@ export const getTotalRetirementContributions = createSelector(
             round(retirementAccountsInfo.roth) +
             round(retirementAccountsInfo.otherIRA)
         );
+    },
+);
+
+export const getCompanyMatch = createSelector(
+    [getCompensation, getRetirementAccountsInfo],
+    (compensation, retirementAccountsInfo: RetirementAccountsInfoInterface) => {
+        const companyMatchOfCompensation = round(retirementAccountsInfo.companyMatchOfCompensation) / 100;
+        const companyMatchPortionMax = Math.max(
+            round(compensation * companyMatchOfCompensation),
+            round(retirementAccountsInfo.employee401K),
+        );
+        return round((companyMatchPortionMax * round(retirementAccountsInfo.companyMatchPercentage)) / 100);
     },
 );
 
@@ -281,9 +301,9 @@ export const getTotalNetSavings = createSelector(
 );
 
 export const getTotalRetirementAccountsSavings = createSelector(
-    getTotalRetirementContributions,
-    totalRetirementContributions => {
-        return round(totalRetirementContributions);
+    [getTotalRetirementContributions, getCompanyMatch],
+    (totalRetirementContributions, companyMatch) => {
+        return round(totalRetirementContributions + companyMatch);
     },
 );
 

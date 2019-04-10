@@ -23,6 +23,8 @@ export interface RetirementAccountsInfoInterface {
     employee401K?: number;
     roth?: number;
     otherIRA?: number;
+    companyMatchOfCompensation?: number;
+    companyMatchPercentage?: number;
 }
 
 export interface TaxInfoInterface {

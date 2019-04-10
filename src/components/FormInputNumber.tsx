@@ -10,6 +10,7 @@ const style = {
 
 interface FormInputNumberProps {
     min?: number;
+    max?: number;
     dollar?: boolean;
     percentage?: boolean;
     width?: string;
@@ -28,6 +29,7 @@ class FormInputNumber extends Component<FormInputNumberProps> {
             return (
                 <InputNumber
                     min={min}
+                    max={this.props.max}
                     style={inputStyle}
                     formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                     onChange={this.props.onChange}
@@ -40,7 +42,7 @@ class FormInputNumber extends Component<FormInputNumberProps> {
                 <InputNumber
                     style={inputStyle}
                     min={min}
-                    max={200}
+                    max={this.props.max}
                     formatter={value => `${value}%`}
                     parser={(value: any) => value.replace('%', '')}
                     onChange={this.props.onChange}
@@ -52,6 +54,7 @@ class FormInputNumber extends Component<FormInputNumberProps> {
             return (
                 <InputNumber
                     min={min}
+                    max={this.props.max}
                     style={inputStyle}
                     onChange={this.props.onChange}
                     value={this.props.value}

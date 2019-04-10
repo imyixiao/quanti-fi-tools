@@ -1,48 +1,97 @@
-import React from 'react';
-import { Row, Col, Form } from 'antd';
+import React, { Component } from 'react';
+import { Row, Col, Form, InputNumber, Button } from 'antd';
 import FormInputNumber from 'components/FormInputNumber';
 import { RetirementAccountsInfoInterface } from '../../types';
-import { getRetirementAccountsInfo } from 'redux/selectors';
+import { getRetirementAccountsInfo, getCompensation } from 'redux/selectors';
 import { AppState } from 'redux/store';
 import * as actions from 'redux/actions/budget';
 import formWrapper from 'components/FormWrapper';
-import { mapPropsToForm } from 'helpers';
+import { mapPropsToForm, round } from 'helpers';
 import { connect } from 'react-redux';
+import { FormComponentProps } from 'antd/lib/form';
+import { max401K } from '../../constants';
 
-export const RetirementAccounts = props => {
-    const { getFieldDecorator } = props.form;
-    return (
-        <Form layout="vertical">
-            <Row>
-                <h2 style={{ float: 'left' }}>Retirement Accounts</h2>
-            </Row>
+interface Props extends StoreState, FormComponentProps {}
 
-            <Row>
-                <Col lg={8} xs={24}>
-                    <Form.Item label="401K">
-                        {getFieldDecorator('employee401K', {})(<FormInputNumber dollar />)}
-                    </Form.Item>
-                </Col>
+export class RetirementAccounts extends Component<Props> {
+    onClickMaxOut = () => {
+        this.props.form.setFieldsValue({ employee401K: max401K });
+    };
 
-                <Col lg={8} xs={24}>
-                    <Form.Item label="Roth IRA">{getFieldDecorator('roth', {})(<FormInputNumber dollar />)}</Form.Item>
-                </Col>
+    onClickCompanyMatch = () => {
+        const companyMatchOfCompensation = round(this.props.form.getFieldValue('companyMatchOfCompensation'));
+        const compensation = this.props.compensation;
+        const employee401K = Math.min(round((compensation * companyMatchOfCompensation) / 100), max401K);
+        this.props.form.setFieldsValue({ employee401K });
+    };
 
-                <Col lg={8} xs={24}>
-                    <Form.Item label="Other After-Tax IRAs">
-                        {getFieldDecorator('otherIRA', {})(<FormInputNumber dollar />)}
-                    </Form.Item>
-                </Col>
-            </Row>
-        </Form>
-    );
-};
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        return (
+            <Form layout="vertical">
+                <Row>
+                    <h2 style={{ float: 'left' }}>Retirement Accounts</h2>
+                </Row>
+
+                <Row>
+                    <Col span={24}>
+                        <Form.Item style={{ textAlign: 'left', marginBottom: '12px' }}>
+                            My company will match{' '}
+                            {getFieldDecorator('companyMatchPercentage', {})(
+                                <InputNumber
+                                    formatter={value => `${value}%`}
+                                    parser={(value: any) => value.replace('%', '')}
+                                />,
+                            )}{' '}
+                            on the first{' '}
+                            {getFieldDecorator('companyMatchOfCompensation', {})(
+                                <InputNumber
+                                    formatter={value => `${value}%`}
+                                    parser={(value: any) => value.replace('%', '')}
+                                />,
+                            )}{' '}
+                            of my eligibile compensation.
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col span={24}>
+                        <Form.Item label="401K">
+                            <div style={{ float: 'left', marginTop: '4px', marginRight: '6px' }}>
+                                <Button onClick={this.onClickMaxOut}>Max out</Button> or{' '}
+                                <Button onClick={this.onClickCompanyMatch}>Up to company match</Button> or
+                            </div>
+                            {getFieldDecorator('employee401K', {})(<FormInputNumber max={max401K} dollar />)}
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col lg={8} xs={24}>
+                        <Form.Item label="Roth IRA">
+                            {getFieldDecorator('roth', {})(<FormInputNumber dollar />)}
+                        </Form.Item>
+                    </Col>
+
+                    <Col lg={8} xs={24}>
+                        <Form.Item label="Other After-Tax IRAs">
+                            {getFieldDecorator('otherIRA', {})(<FormInputNumber dollar />)}
+                        </Form.Item>
+                    </Col>
+                </Row>
+            </Form>
+        );
+    }
+}
 interface StoreState {
     retirementAccountsInfo: RetirementAccountsInfoInterface;
+    compensation: number;
 }
 
 const mapStateToProps = (state: AppState): StoreState => ({
     retirementAccountsInfo: getRetirementAccountsInfo(state),
+    compensation: getCompensation(state),
 });
 
 interface Dispatch {
