@@ -1,0 +1,72 @@
+{
+  "name": "quanti-fi-tools",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "^10",
+    "yarn": "^1",
+    "npm": "^6"
+  },
+  "dependencies": {
+    "@antv/data-set": "^0.10.2",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.11.3",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.2",
+    "@types/react-redux": "^7.0.3",
+    "@types/react-router-dom": "^4.3.1",
+    "antd": "^3.13.3",
+    "axios": "^0.18.0",
+    "connected-react-router": "^6.3.2",
+    "dotenv": "^6.2.0",
+    "eslint-plugin-flowtype": "2.x",
+    "exit-hook": "^2.0.0",
+    "firebase": "^5.9.3",
+    "lodash": "^4.17.11",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-firebaseui": "^3.1.2",
+    "react-image-gallery": "^0.8.14",
+    "react-redux": "^6.0.0",
+    "react-redux-firebase": "^2.2.6",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.5",
+    "react-split-pane": "^0.1.85",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-persist": "^5.10.0",
+    "redux-saga": "^1.0.1",
+    "reselect": "^4.0.0",
+    "typescript": "^3.3.3333",
+    "viser-react": "^2.4.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx ."
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "@typescript-eslint/parser": "^1.5.0",
+    "babel-eslint": "^9.0.0",
+    "eslint": "5.12.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-react-app": "^3.0.8",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.16.4"
+  }
+}
