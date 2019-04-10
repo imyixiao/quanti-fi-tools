@@ -4,7 +4,7 @@ Quanti-FI, Quantify your Financial Independence.
 
 This project is a one stop collection of real estate calculators, annual budget tools, and other tools that can help us reach financial independence.
 
-<https://tools.qunati-fi.com>
+<https://tools.quanti-fi.com>
 
 This repo is the frontend implementation of the website, please use our website for full service. However, this repo is still standalone and can be compiled and run on itself.
 
