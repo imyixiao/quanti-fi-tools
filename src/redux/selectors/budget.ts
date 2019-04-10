@@ -1,3 +1,4 @@
+import { californiaTaxBuckets, federalTaxBuckets } from './../../budget/constants';
 import { RetirementAccountsInfoInterface } from './../../budget/types';
 import { ExpensesInfoInterface } from 'src/budget/types';
 import { AppState } from '../store';
@@ -110,62 +111,36 @@ export const getTaxableIncome = createSelector(
 
 export const singleStandardDeduction = 12200;
 
-// single 2019-2020
-// https://www.nerdwallet.com/blog/taxes/federal-income-tax-brackets/
 export const getFederalIncomeTax = createSelector(
     getTaxableIncome,
     (income: number) => {
         const adjustedIncome = Math.max(income - singleStandardDeduction, 0);
-        const taxRates: { cap: number; rate: number }[] = [
-            { cap: 0, rate: 0 },
-            { cap: 9700, rate: 0.1 },
-            { cap: 39475, rate: 0.12 },
-            { cap: 84200, rate: 0.22 },
-            { cap: 160725, rate: 0.24 },
-            { cap: 204100, rate: 0.32 },
-            { cap: 510300, rate: 0.35 },
-            { cap: -1, rate: 0.37 },
-        ];
-
+        const taxBuckets = federalTaxBuckets;
         let totalTax = 0;
-        for (let i = 1; i < taxRates.length; i++) {
-            const bracket = taxRates[i];
+        for (let i = 1; i < taxBuckets.length; i++) {
+            const bracket = taxBuckets[i];
             if (adjustedIncome < bracket.cap || bracket.cap === -1) {
-                return totalTax + (adjustedIncome - taxRates[i - 1].cap) * bracket.rate;
+                return totalTax + (adjustedIncome - taxBuckets[i - 1].cap) * bracket.rate;
             } else {
-                totalTax += (bracket.cap - taxRates[i - 1].cap) * bracket.rate;
+                totalTax += (bracket.cap - taxBuckets[i - 1].cap) * bracket.rate;
             }
         }
         return totalTax;
     },
 );
 
-// Single 2018-2019
-// https://www.ftb.ca.gov/forms/2018-California-Tax-Rates-and-Exemptions.shtml
 export const getCaliforniaIncomeTax = createSelector(
     getTaxableIncome,
     (income: number): number => {
         const adjustedIncome = Math.max(income - 4401, 0);
-        const taxRates: { cap: number; rate: number }[] = [
-            { cap: 0, rate: 0 },
-            { cap: 8544, rate: 0.01 },
-            { cap: 20255, rate: 0.02 },
-            { cap: 31969, rate: 0.04 },
-            { cap: 44377, rate: 0.06 },
-            { cap: 56085, rate: 0.08 },
-            { cap: 286492, rate: 0.093 },
-            { cap: 343788, rate: 0.103 },
-            { cap: 572980, rate: 0.113 },
-            { cap: -1, rate: 0.123 },
-        ];
-
+        const taxBuckets = californiaTaxBuckets;
         let totalTax = 0;
-        for (let i = 1; i < taxRates.length; i++) {
-            const bracket = taxRates[i];
+        for (let i = 1; i < taxBuckets.length; i++) {
+            const bracket = taxBuckets[i];
             if (adjustedIncome < bracket.cap || bracket.cap === -1) {
-                return totalTax + (adjustedIncome - taxRates[i - 1].cap) * bracket.rate;
+                return totalTax + (adjustedIncome - taxBuckets[i - 1].cap) * bracket.rate;
             } else {
-                totalTax += (bracket.cap - taxRates[i - 1].cap) * bracket.rate;
+                totalTax += (bracket.cap - taxBuckets[i - 1].cap) * bracket.rate;
             }
         }
         return totalTax;
