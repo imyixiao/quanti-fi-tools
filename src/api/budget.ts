@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { serverURL } from 'consts';
+import { serverURL } from 'consts/serverURL';
 
 export async function fetchBudgetReports(idToken: string, ids?: string[]) {
     const fetchReportUrl = serverURL + '/fetch-budget-reports';

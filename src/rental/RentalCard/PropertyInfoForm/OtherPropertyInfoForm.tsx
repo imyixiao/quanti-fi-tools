@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, InputNumber, Input, Checkbox, Col } from 'antd';
-import { PROPERTY_INFO_LABELS } from '../../constants.json';
+import { PROPERTY_INFO_LABELS } from 'consts/rental';
 import BasicRow from 'components/BasicRow';
 import FormInputNumber from 'components/FormInputNumber';
 import { FormComponentProps } from 'antd/lib/form/Form';

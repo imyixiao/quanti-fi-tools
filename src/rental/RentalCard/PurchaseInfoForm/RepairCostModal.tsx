@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Modal } from 'antd';
 
-import { REPAIR_COST_BREAKDOWN_LABELS } from '../../constants.json';
+import { REPAIR_COST_BREAKDOWN_LABELS } from 'consts/rental';
 import { setRepairCostBreakdown } from 'redux/actions/rental';
 import { getRepairCostBreakdown } from 'redux/selectors';
 import { createFormFromArray, mapPropsToForm } from 'helpers';

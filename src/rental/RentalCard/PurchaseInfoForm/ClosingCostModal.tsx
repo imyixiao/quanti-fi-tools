@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Modal } from 'antd';
 
-import { PURCHASE_CLOSING_COST_BREAKDOWN_LABELS } from '../../constants.json';
+import { PURCHASE_CLOSING_COST_BREAKDOWN_LABELS } from 'consts/rental';
 import { setClosingCostBreakdown } from 'redux/actions/rental';
 import { getClosingCostBreakdown } from 'redux/selectors';
 import { FormComponentProps } from 'antd/lib/form/Form';

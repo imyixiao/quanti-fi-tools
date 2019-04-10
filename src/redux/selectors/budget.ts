@@ -1,4 +1,4 @@
-import { californiaTaxBuckets, federalTaxBuckets } from './../../budget/constants';
+import { californiaTaxBuckets, federalTaxBuckets } from 'consts/budget';
 import { RetirementAccountsInfoInterface } from './../../budget/types';
 import { ExpensesInfoInterface } from 'src/budget/types';
 import { AppState } from '../store';

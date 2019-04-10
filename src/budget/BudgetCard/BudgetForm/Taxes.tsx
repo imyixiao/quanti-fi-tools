@@ -8,7 +8,7 @@ import { setTaxInfo } from 'redux/actions/budget';
 import { connect } from 'react-redux';
 import formWrapper from 'components/FormWrapper';
 import { mapPropsToForm, round } from 'helpers';
-import { states } from 'consts';
+import { states } from 'consts/states';
 
 const budgetDisabledStyle = {
     backgroundColor: 'transparent',

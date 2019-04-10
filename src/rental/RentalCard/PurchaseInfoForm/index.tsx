@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Form, Checkbox, Row, Col } from 'antd';
 import { setPurchaseInfo } from 'redux/actions/rental';
 import { getPurchaseInfo, getRentalStep } from 'redux/selectors';
-import { PROPERTY_INFO_LABELS, PURCHASE_LABELS } from '../../constants.json';
+import { PROPERTY_INFO_LABELS, PURCHASE_LABELS } from 'consts/rental';
 import { FormComponentProps } from 'antd/lib/form/Form';
 
 import ClosingCostModal from './ClosingCostModal';

@@ -9,7 +9,7 @@ import formWrapper from 'components/FormWrapper';
 import { mapPropsToForm, round } from 'helpers';
 import { connect } from 'react-redux';
 import { FormComponentProps } from 'antd/lib/form';
-import { max401K } from '../../constants';
+import { max401K } from 'consts/budget';
 
 interface Props extends StoreState, FormComponentProps {}
 

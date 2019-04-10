@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Form, Row, Col } from 'antd';
 import { setRentalInfo } from 'redux/actions/rental';
 import { getRentalInfo, getRentalStep } from 'redux/selectors';
-import { RENTAL_LABELS } from '../../constants.json';
+import { RENTAL_LABELS } from 'consts/rental';
 import { mapPropsToForm } from 'helpers';
 import FormInputNumber from 'components/FormInputNumber';
 import BasicRow from 'components/BasicRow';

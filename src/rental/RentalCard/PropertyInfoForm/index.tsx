@@ -11,7 +11,7 @@ import {
     RENTAL_STEP_VALIDATION_FAILED,
 } from 'redux/actions/rental';
 
-import { PROPERTY_INFO_LABELS } from '../../constants.json';
+import { PROPERTY_INFO_LABELS } from 'consts/rental';
 import OtherPropertyInfoForm from './OtherPropertyInfoForm';
 import { mapPropsToForm } from 'helpers';
 import BasicRow from 'components/BasicRow';

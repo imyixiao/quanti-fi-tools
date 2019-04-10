@@ -3,10 +3,10 @@
         "baseUrl": ".",
         "paths": {
             "components/*": ["src/components/*"],
-            "consts": ["src/consts"],
             "redux/*": ["src/redux/*"],
             "helpers": ["src/helpers"],
-            "api/*": ["src/api/*"]
+            "api/*": ["src/api/*"],
+            "consts/*": ["src/consts/*"]
         }
     }
 }

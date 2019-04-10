@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { serverURL } from 'consts';
+import { serverURL } from 'consts/serverURL';
 
 export default function fetchWebsite(idToken, url) {
     const encodedUrl = url.trim();
