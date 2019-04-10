@@ -266,6 +266,13 @@ export const getTotalAnnualExpenses = createSelector(
     },
 );
 
+export const getTotalExpenses = createSelector(
+    [getTotalMonthlyExpenses, getTotalAnnualExpenses],
+    (totalMonthlyExpenses: number, totalAnnualExpenses: number) => {
+        return round(totalMonthlyExpenses * 12 + totalAnnualExpenses);
+    },
+);
+
 export const getTotalNetSavings = createSelector(
     [getAfterTaxIncome, getTotalMonthlyExpenses, getTotalAnnualExpenses],
     (afterTaxIncome, totalMonthlyExpenses, totalAnnualExpenses) => {
@@ -319,11 +326,11 @@ export const getDerivedBudget = createSelector(
             },
             monthlyExpensesInfo: {
                 ...budget.monthlyExpensesInfo,
-                totalMonthlyExpenses,
+                totalExpenses: totalMonthlyExpenses,
             },
             annualExpensesInfo: {
                 ...budget.annualExpensesInfo,
-                totalAnnualExpenses,
+                totalExpenses: totalAnnualExpenses,
             },
             results: derivedResults,
         };

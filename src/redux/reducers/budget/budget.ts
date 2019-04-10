@@ -22,6 +22,7 @@ export const initialBudgetState: BudgetState = {
     },
     annualExpensesInfo: {
         expenses: [],
+        totalExpenses: 0,
     },
     monthlyExpensesInfo: {
         expenses: [
@@ -30,6 +31,7 @@ export const initialBudgetState: BudgetState = {
                 value: 0,
             },
         ],
+        totalExpenses: 0,
     },
     results: {
         totalNetSavings: 0,

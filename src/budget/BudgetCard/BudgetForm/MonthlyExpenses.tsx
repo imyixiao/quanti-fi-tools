@@ -8,8 +8,16 @@ import { mapPropsToForm, transformFormFieldsToExpenses, transformExpensesToFormF
 import { connect } from 'react-redux';
 import { FormComponentProps } from 'antd/lib/form';
 import { expensesFormWrapper, ExpensesStoreState, ExpensesDispatch } from './ExpensesFormWrapper';
+import FormInputNumber from 'components/FormInputNumber';
 
 const InputGroup = Input.Group;
+
+const budgetDisabledStyle = {
+    backgroundColor: 'transparent',
+    color: 'rgba(0,0,0,0.65)',
+    border: 'none',
+    cursor: 'default',
+};
 
 interface MonthlyExpensesFormProps extends WrappedMonthlyExpensesFormProps, FormComponentProps {}
 
@@ -79,6 +87,16 @@ class MonthlyExpenses extends Component<MonthlyExpensesFormProps> {
                         </Form.Item>
                     </Col>
                 </Row>
+
+                <Row>
+                    <Col span={24}>
+                        <Form.Item label="Total Monthly Expenses">
+                            {getFieldDecorator('totalExpenses', {})(
+                                <FormInputNumber dollar disabled style={budgetDisabledStyle} />,
+                            )}
+                        </Form.Item>
+                    </Col>
+                </Row>
             </Form>
         );
     }
@@ -114,7 +132,9 @@ export default connect(
                 props.setExpenses(transformFormFieldsToExpenses(props.expensesInfo.expenses, changedValues));
             },
             mapPropsToFields(props) {
-                return mapPropsToForm(transformExpensesToFormFields(props.expensesInfo.expenses));
+                const fields = mapPropsToForm(transformExpensesToFormFields(props.expensesInfo.expenses));
+                fields['totalExpenses'] = Form.createFormField({ value: props.expensesInfo.totalExpenses });
+                return fields;
             },
             // onFieldsChange(props, changedFields) {
             //     props.handleFormChange(changedFields);
