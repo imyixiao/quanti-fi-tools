@@ -32,7 +32,7 @@ export interface TaxInfoInterface {
     taxableIncome?: number;
     afterTaxIncome?: number;
     federalIncomeTax?: number;
-    californiaIncomeTax?: number;
+    stateIncomeTax?: number;
     socialSecurityTax?: number;
     medicareTax?: number;
     FICATax?: number;

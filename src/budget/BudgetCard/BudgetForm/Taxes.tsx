@@ -106,8 +106,8 @@ export const Taxes = props => {
                     </Form.Item>
                 </Col>
                 <Col lg={6} sm={24}>
-                    <Form.Item label="California Income Tax">
-                        {getFieldDecorator('californiaIncomeTax', {})(
+                    <Form.Item label="State Income Tax">
+                        {getFieldDecorator('stateIncomeTax', {})(
                             <FormInputNumber dollar disabled style={budgetDisabledStyle} />,
                         )}
                     </Form.Item>

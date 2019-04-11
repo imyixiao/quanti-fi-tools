@@ -13,7 +13,7 @@ export const initialBudgetState: BudgetState = {
         filingStatus: 'single',
         taxableIncome: 0,
         federalIncomeTax: 0,
-        californiaIncomeTax: 0,
+        stateIncomeTax: 0,
         FICATax: 0,
         NIITTax: 0,
         totalIncomeTax: 0,
