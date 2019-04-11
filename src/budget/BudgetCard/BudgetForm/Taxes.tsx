@@ -44,18 +44,20 @@ export const Taxes = props => {
                         {getFieldDecorator('state', {})(
                             <Select>
                                 {states.map(state => {
-                                    if (state.abbreviation !== 'CA') {
-                                        return (
-                                            <Option value={state.abbreviation} key={state.abbreviation} disabled>
-                                                {state.name}
-                                            </Option>
-                                        );
-                                    } else {
-                                        return (
-                                            <Option value={state.abbreviation} key={state.abbreviation}>
-                                                {state.name}
-                                            </Option>
-                                        );
+                                    switch (state.abbreviation) {
+                                        case 'CA':
+                                        case 'WA':
+                                            return (
+                                                <Option value={state.abbreviation} key={state.abbreviation}>
+                                                    {state.name}
+                                                </Option>
+                                            );
+                                        default:
+                                            return (
+                                                <Option value={state.abbreviation} key={state.abbreviation} disabled>
+                                                    {state.name}
+                                                </Option>
+                                            );
                                     }
                                 })}
                             </Select>,
