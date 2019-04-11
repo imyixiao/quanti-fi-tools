@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React from 'react';
 import BasicRow from './components/BasicRow';
 import FormInputNumber from './components/FormInputNumber';
+import { stateIncomeTaxBuckets, stateIncomeTaxStandardDeduction } from 'consts/budget';
 
 export function round(num?: any) {
     if (!num || Number.isNaN(num)) {
@@ -126,4 +127,19 @@ export const transformFormFieldsToExpenses = (expenses, changedValues) => {
         }
     });
     return transformed;
+};
+
+export const calculateIncomeTaxForState = (state: string, income: number): number => {
+    const adjustedIncome = Math.max(income - stateIncomeTaxStandardDeduction[state], 0);
+    const taxBuckets = stateIncomeTaxBuckets[state];
+    let totalTax = 0;
+    for (let i = 1; i < taxBuckets.length; i++) {
+        const bracket = taxBuckets[i];
+        if (adjustedIncome < bracket.cap || bracket.cap === -1) {
+            return totalTax + (adjustedIncome - taxBuckets[i - 1].cap) * bracket.rate;
+        } else {
+            totalTax += (bracket.cap - taxBuckets[i - 1].cap) * bracket.rate;
+        }
+    }
+    return totalTax;
 };

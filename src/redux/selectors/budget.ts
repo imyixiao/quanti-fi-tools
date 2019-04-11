@@ -1,9 +1,9 @@
-import { californiaTaxBuckets, federalTaxBuckets } from 'consts/budget';
-import { RetirementAccountsInfoInterface } from './../../budget/types';
+import { californiaTaxBuckets, federalTaxBuckets, federalStandardDeduction } from 'consts/budget';
+import { RetirementAccountsInfoInterface, TaxInfoInterface } from './../../budget/types';
 import { ExpensesInfoInterface } from 'src/budget/types';
 import { AppState } from '../store';
 import { createSelector } from 'reselect';
-import { round } from 'helpers';
+import { round, calculateIncomeTaxForState } from 'helpers';
 import _ from 'lodash';
 
 export const getBudget = (state: AppState) => state.budget;
@@ -109,12 +109,10 @@ export const getTaxableIncome = createSelector(
     },
 );
 
-export const singleStandardDeduction = 12200;
-
 export const getFederalIncomeTax = createSelector(
     getTaxableIncome,
     (income: number) => {
-        const adjustedIncome = Math.max(income - singleStandardDeduction, 0);
+        const adjustedIncome = Math.max(income - federalStandardDeduction, 0);
         const taxBuckets = federalTaxBuckets;
         let totalTax = 0;
         for (let i = 1; i < taxBuckets.length; i++) {
@@ -129,21 +127,12 @@ export const getFederalIncomeTax = createSelector(
     },
 );
 
-export const getCaliforniaIncomeTax = createSelector(
-    getTaxableIncome,
-    (income: number): number => {
-        const adjustedIncome = Math.max(income - 4401, 0);
-        const taxBuckets = californiaTaxBuckets;
-        let totalTax = 0;
-        for (let i = 1; i < taxBuckets.length; i++) {
-            const bracket = taxBuckets[i];
-            if (adjustedIncome < bracket.cap || bracket.cap === -1) {
-                return totalTax + (adjustedIncome - taxBuckets[i - 1].cap) * bracket.rate;
-            } else {
-                totalTax += (bracket.cap - taxBuckets[i - 1].cap) * bracket.rate;
-            }
-        }
-        return totalTax;
+export const getStateIncomeTax = createSelector(
+    [getTaxInfo, getTaxableIncome],
+    (taxInfo: TaxInfoInterface, income: number): number => {
+        const state = taxInfo.state;
+        if (!state || !income) return 0;
+        return calculateIncomeTaxForState(state, income);
     },
 );
 
@@ -181,9 +170,9 @@ export const getNIITTax = createSelector(
 );
 
 export const getTotalIncomeTax = createSelector(
-    [getFederalIncomeTax, getCaliforniaIncomeTax, getFICATax, getNIITTax],
-    (federalIncomeTax: number, californiaIncomeTax: number, FICATax: number, NIITTax: number) => {
-        return round(federalIncomeTax + californiaIncomeTax + FICATax + NIITTax);
+    [getFederalIncomeTax, getStateIncomeTax, getFICATax, getNIITTax],
+    (federalIncomeTax: number, stateIncomeTax: number, FICATax: number, NIITTax: number) => {
+        return round(federalIncomeTax + stateIncomeTax + FICATax + NIITTax);
     },
 );
 
@@ -197,7 +186,7 @@ export const getEffectiveTaxRate = createSelector(
 export const getTaxDetails = createSelector(
     [
         getFederalIncomeTax,
-        getCaliforniaIncomeTax,
+        getStateIncomeTax,
         getSocialSecurityTax,
         getMedicareTax,
         getFICATax,
@@ -207,7 +196,7 @@ export const getTaxDetails = createSelector(
     ],
     (
         federalIncomeTax,
-        californiaIncomeTax,
+        stateIncomeTax,
         socialSecurityTax,
         medicareTax,
         FICATax,
@@ -217,7 +206,7 @@ export const getTaxDetails = createSelector(
     ) => {
         return {
             federalIncomeTax,
-            californiaIncomeTax,
+            stateIncomeTax,
             socialSecurityTax,
             medicareTax,
             FICATax,
