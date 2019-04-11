@@ -173,9 +173,31 @@
   width: 90%;
 }
 
+.expense-input-group-left {
+  width: 70% !important;
+  float: left !important;
+  text-align: left !important;
+}
+
+.expense-input-group-right {
+  width: 30% !important;
+  float: left !important;
+  text-align: left !important;
+}
+
 @media all and (max-width: 767px) {
   .homepage-col {
     margin-top: 16px;
+  }
+  .expense-input-group-left {
+    width: 60% !important;
+    float: left !important;
+    text-align: left !important;
+  }
+  .expense-input-group-right {
+    width: 40% !important;
+    float: left !important;
+    text-align: left !important;
   }
 }
 
@@ -184,14 +206,12 @@
     margin-top: 64px;
     padding: 0 10px;
   }
-
   .report {
     padding: 0 8px;
     text-align: center;
     width: 100%;
     margin: 0 auto;
   }
-
   .report-buttons {
     width: 100%;
     margin-top: 6px;
@@ -199,11 +219,9 @@
     text-align: center;
     float: center;
   }
-
   .report-button {
     margin-top: 4px;
   }
-
   .expense-donut-chart {
     padding-bottom: 28px;
     width: 100%;

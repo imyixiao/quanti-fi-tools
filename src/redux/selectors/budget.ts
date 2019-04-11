@@ -1,4 +1,4 @@
-import { californiaTaxBuckets, federalTaxBuckets, federalStandardDeduction } from 'consts/budget';
+import { federalTaxBuckets, federalStandardDeduction } from 'consts/budget';
 import { RetirementAccountsInfoInterface, TaxInfoInterface } from './../../budget/types';
 import { ExpensesInfoInterface } from 'src/budget/types';
 import { AppState } from '../store';

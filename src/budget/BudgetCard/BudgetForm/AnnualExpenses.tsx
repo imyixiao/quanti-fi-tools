@@ -33,14 +33,14 @@ class AnnualExpenses extends Component<AnnualExpensesFormProps> {
         const { getFieldDecorator } = this.props.form;
         const annualExpenseFormItems = _.range(this.props.expensesLength).map(id => (
             <Form.Item key={id}>
-                <Row>
-                    <Col lg={12} sm={24}>
+                <Row type="flex" justify="space-between">
+                    <Col lg={12} sm={16} xs={20}>
                         <InputGroup compact style={{ float: 'left' }}>
                             {getFieldDecorator(`keys_${id}`, {
                                 rules: [{ required: true, message: 'Please enter expense description' }],
                             })(
                                 <Input
-                                    style={{ width: '70%', float: 'left', textAlign: 'left' }}
+                                    className="expense-input-group-left"
                                     placeholder="Please enter expense description"
                                 />,
                             )}
@@ -49,17 +49,20 @@ class AnnualExpenses extends Component<AnnualExpensesFormProps> {
                                 rules: [{ required: true, message: 'Please enter expense amount' }],
                             })(
                                 <InputNumber
-                                    style={{ width: '30%', float: 'left', textAlign: 'left' }}
+                                    className="expense-input-group-right"
                                     formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                 />,
                             )}
                         </InputGroup>
                     </Col>
-                    <Icon
-                        className="dynamic-delete-button"
-                        type="minus-circle-o"
-                        onClick={() => this.props.remove(id)}
-                    />
+                    <Col span={4}>
+                        <Icon
+                            className="dynamic-delete-button"
+                            type="minus-circle-o"
+                            style={{ float: 'right', marginTop: '8px' }}
+                            onClick={() => this.props.remove(id)}
+                        />
+                    </Col>
                 </Row>
             </Form.Item>
         ));
