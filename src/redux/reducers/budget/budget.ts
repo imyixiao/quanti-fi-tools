@@ -48,21 +48,25 @@ export default function(state = initialBudgetState, action): BudgetState {
     const deriveBudget = newBudget => getDerivedBudget({ rental: initialRentalState, budget: newBudget });
 
     switch (action.type) {
-        case actionTypes.SET_BUDGET_TITLE:
+        case actionTypes.SET_BUDGET_TITLE:{
             const { reportTitle } = action.payload;
             return deriveBudget({ ...state, reportTitle });
-        case actionTypes.SET_INCOME_INFO:
+        }
+        case actionTypes.SET_INCOME_INFO: {
             const { incomeInfo } = action.payload;
             return deriveBudget({ ...state, incomeInfo: { ...state.incomeInfo, ...incomeInfo } });
-        case actionTypes.SET_RETIREMENT_ACCOUNTS_INFO:
+        }
+        case actionTypes.SET_RETIREMENT_ACCOUNTS_INFO: {
             const { retirementAccountsInfo } = action.payload;
             return deriveBudget({
                 ...state,
                 retirementAccountsInfo: { ...state.retirementAccountsInfo, ...retirementAccountsInfo },
             });
-        case actionTypes.SET_TAX_INFO:
+        }
+        case actionTypes.SET_TAX_INFO: {
             const { taxInfo } = action.payload;
             return deriveBudget({ ...state, taxInfo: { ...state.taxInfo, ...taxInfo } });
+        }
         case actionTypes.SET_MONTHLY_EXPENSES: {
             const { expenses } = action.payload;
             return deriveBudget({
@@ -135,6 +139,7 @@ export default function(state = initialBudgetState, action): BudgetState {
                         ...reportInfo.annualExpensesInfo,
                     },
                     results: {},
+                    reportTitle: reportInfo.reportTitle,
                     currentReportId: reportId,
                 };
             }
