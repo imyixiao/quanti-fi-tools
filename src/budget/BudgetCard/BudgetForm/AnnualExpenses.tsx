@@ -92,17 +92,14 @@ class AnnualExpenses extends Component<AnnualExpensesFormProps> {
                 </Row>
 
                 <Row>
-                    <Col span={24}>
+                    <Col lg={12} xs={24}>
                         <Form.Item label="Total Annual Expenses">
                             {getFieldDecorator('totalAnnualExpenses', {})(
                                 <FormInputNumber dollar disabled style={budgetDisabledStyle} />,
                             )}
                         </Form.Item>
                     </Col>
-                </Row>
-
-                <Row>
-                    <Col span={24}>
+                    <Col lg={12} xs={24}>
                         <Form.Item label="Total Expenses">
                             {getFieldDecorator('totalExpenses', {})(
                                 <FormInputNumber dollar disabled style={budgetDisabledStyle} />,
