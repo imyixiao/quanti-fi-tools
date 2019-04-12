@@ -48,7 +48,7 @@ export default function(state = initialBudgetState, action): BudgetState {
     const deriveBudget = newBudget => getDerivedBudget({ rental: initialRentalState, budget: newBudget });
 
     switch (action.type) {
-        case actionTypes.SET_BUDGET_TITLE:{
+        case actionTypes.SET_BUDGET_TITLE: {
             const { reportTitle } = action.payload;
             return deriveBudget({ ...state, reportTitle });
         }
