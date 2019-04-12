@@ -1,5 +1,5 @@
 import { federalTaxBuckets, federalStandardDeduction } from 'consts/budget';
-import { RetirementAccountsInfoInterface, TaxInfoInterface } from './../../budget/types';
+import { RetirementAccountsInfoInterface, TaxInfoInterface, ResultsInterface } from './../../budget/types';
 import { ExpensesInfoInterface } from 'src/budget/types';
 import { AppState } from '../store';
 import { createSelector } from 'reselect';
@@ -291,11 +291,13 @@ export const getDerivedTaxInfo = createSelector(
 );
 
 export const getDerivedResults = createSelector(
-    [getTotalNetSavings, getTotalRetirementAccountsSavings, getTotalSavings],
-    (totalNetSavings, totalRetirementAccountsSavings, totalSavings) => ({
+    [getAfterTaxIncome, getTotalNetSavings, getTotalRetirementAccountsSavings, getTotalSavings],
+    (afterTaxIncome, totalNetSavings, totalRetirementAccountsSavings, totalSavings): ResultsInterface => ({
         totalNetSavings,
         totalRetirementAccountsSavings,
         totalSavings,
+        totalNetSavingsRate: round((totalNetSavings / afterTaxIncome) * 100),
+        totalSavingsRate: round((totalSavings / afterTaxIncome) * 100),
     }),
 );
 

@@ -49,8 +49,10 @@ export interface ExpensesInfoInterface {
 
 export interface ResultsInterface {
     totalNetSavings?: number;
+    totalNetSavingsRate?: number;
     totalRetirementAccountsSavings?: number;
     totalSavings?: number;
+    totalSavingsRate?: number;
 }
 
 export interface BudgetReportInterface {

@@ -24,7 +24,7 @@ export const Results = props => {
                         )}
                     </Form.Item>
                 </Col>
-                <Col lg={12} sm={24}>
+                <Col lg={6} sm={24}>
                     <Form.Item label="Per Month">
                         <FormInputNumber
                             dollar
@@ -32,6 +32,13 @@ export const Results = props => {
                             style={budgetDisabledStyle}
                             value={round(getFieldValue('totalNetSavings') / 12)}
                         />
+                    </Form.Item>
+                </Col>
+                <Col lg={6} sm={24}>
+                    <Form.Item label="Net Savings Rate">
+                        {getFieldDecorator('totalNetSavingsRate', {})(
+                            <FormInputNumber percentage disabled style={budgetDisabledStyle} />,
+                        )}
                     </Form.Item>
                 </Col>
             </Row>
@@ -45,14 +52,14 @@ export const Results = props => {
                 </Col>
             </Row>
             <Row>
-                <Col lg={12} sm={24}>
+                <Col lg={12} xs={24}>
                     <Form.Item label="Total Savings">
                         {getFieldDecorator('totalSavings', {})(
                             <FormInputNumber dollar disabled style={budgetDisabledStyle} />,
                         )}
                     </Form.Item>
                 </Col>
-                <Col lg={12} sm={24}>
+                <Col lg={6} xs={24}>
                     <Form.Item label="Per Month">
                         <FormInputNumber
                             dollar
@@ -60,6 +67,13 @@ export const Results = props => {
                             style={budgetDisabledStyle}
                             value={round(getFieldValue('totalSavings') / 12)}
                         />
+                    </Form.Item>
+                </Col>
+                <Col lg={6} xs={24}>
+                    <Form.Item label="Savings Rate">
+                        {getFieldDecorator('totalSavingsRate', {})(
+                            <FormInputNumber percentage disabled style={budgetDisabledStyle} />,
+                        )}
                     </Form.Item>
                 </Col>
             </Row>
