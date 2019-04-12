@@ -9,15 +9,9 @@ import { connect } from 'react-redux';
 import { FormComponentProps } from 'antd/lib/form';
 import { expensesFormWrapper, ExpensesStoreState, ExpensesDispatch } from './ExpensesFormWrapper';
 import FormInputNumber from 'components/FormInputNumber';
+import { budgetDisabledStyle } from 'consts/budget';
 
 const InputGroup = Input.Group;
-
-const budgetDisabledStyle = {
-    backgroundColor: 'transparent',
-    color: 'rgba(0,0,0,0.65)',
-    border: 'none',
-    cursor: 'default',
-};
 
 interface MonthlyExpensesFormProps extends WrappedMonthlyExpensesFormProps, FormComponentProps {}
 

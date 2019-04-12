@@ -7,13 +7,7 @@ import { getBudgetResults } from 'redux/selectors';
 import { AppState } from 'redux/store';
 import { connect } from 'react-redux';
 import formWrapper from 'components/FormWrapper';
-
-const budgetDisabledStyle = {
-    backgroundColor: 'transparent',
-    color: 'rgba(0,0,0,0.65)',
-    border: 'none',
-    cursor: 'default',
-};
+import { budgetDisabledStyle } from 'consts/budget';
 
 export const Results = props => {
     const { getFieldDecorator, getFieldValue } = props.form;

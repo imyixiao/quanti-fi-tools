@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Row, Col, Form, InputNumber, Button } from 'antd';
 import FormInputNumber from 'components/FormInputNumber';
 import { RetirementAccountsInfoInterface } from '../../types';
-import { getRetirementAccountsInfo, getCompensation } from 'redux/selectors';
+import { getRetirementAccountsInfo, getCompensation, getTotalRetirementAccountsSavings } from 'redux/selectors';
 import { AppState } from 'redux/store';
 import * as actions from 'redux/actions/budget';
 import formWrapper from 'components/FormWrapper';
 import { mapPropsToForm, round } from 'helpers';
 import { connect } from 'react-redux';
 import { FormComponentProps } from 'antd/lib/form';
-import { max401K } from 'consts/budget';
+import { max401K, budgetDisabledStyle } from 'consts/budget';
 
 interface Props extends StoreState, FormComponentProps {}
 
@@ -80,17 +80,30 @@ export class RetirementAccounts extends Component<Props> {
                         </Form.Item>
                     </Col>
                 </Row>
+
+                <Row>
+                    <Col lg={12} sm={24}>
+                        <Form.Item label="Total Retirement Accounts Savings">
+                            {getFieldDecorator('totalRetirementAccountsSavings', {})(
+                                <FormInputNumber dollar disabled style={budgetDisabledStyle} />,
+                            )}
+                        </Form.Item>
+                    </Col>
+                </Row>
             </Form>
         );
     }
 }
 interface StoreState {
-    retirementAccountsInfo: RetirementAccountsInfoInterface;
+    retirementAccountsInfo: RetirementAccountsInfoInterface & { totalRetirementAccountsSavings: number };
     compensation: number;
 }
 
 const mapStateToProps = (state: AppState): StoreState => ({
-    retirementAccountsInfo: getRetirementAccountsInfo(state),
+    retirementAccountsInfo: {
+        ...getRetirementAccountsInfo(state),
+        totalRetirementAccountsSavings: getTotalRetirementAccountsSavings(state),
+    },
     compensation: getCompensation(state),
 });
 

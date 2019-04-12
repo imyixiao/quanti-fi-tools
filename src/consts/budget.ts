@@ -41,3 +41,10 @@ export const stateIncomeTaxStandardDeduction = {
     CA: 4401,
     WA: 0,
 };
+
+export const budgetDisabledStyle = {
+    backgroundColor: 'transparent',
+    color: 'rgba(0,0,0,0.65)',
+    border: 'none',
+    cursor: 'default',
+};

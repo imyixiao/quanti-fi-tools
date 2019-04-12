@@ -9,13 +9,7 @@ import { connect } from 'react-redux';
 import formWrapper from 'components/FormWrapper';
 import { mapPropsToForm, round } from 'helpers';
 import { states } from 'consts/states';
-
-const budgetDisabledStyle = {
-    backgroundColor: 'transparent',
-    color: 'rgba(0,0,0,0.65)',
-    border: 'none',
-    cursor: 'default',
-};
+import { budgetDisabledStyle } from 'consts/budget';
 
 const Option = Select.Option;
 
