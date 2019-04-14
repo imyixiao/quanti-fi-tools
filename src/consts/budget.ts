@@ -16,7 +16,7 @@ export const federalTaxBuckets: { cap: number; rate: number }[] = [
 export const federalStandardDeduction = 12200;
 
 // Single 2018-2019
-// https://www.ftb.ca.gov/forms/2018-California-Tax-Rates-and-Exemptions.shtml]
+// https://www.ftb.ca.gov/forms/2018-California-Tax-Rates-and-Exemptions.shtml
 const californiaTaxBuckets: { cap: number; rate: number }[] = [
     { cap: 0, rate: 0 },
     { cap: 8544, rate: 0.01 },

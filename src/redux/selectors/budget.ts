@@ -145,6 +145,7 @@ export const getSocialSecurityTax = createSelector(
 );
 
 // https://www.irs.gov/businesses/small-businesses-self-employed/questions-and-answers-for-the-additional-medicare-tax
+// https://www.thebalancesmb.com/medicare-tax-3193121
 export const getMedicareTax = createSelector(
     getWage,
     (wage: number) => {
