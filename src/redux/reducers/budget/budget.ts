@@ -138,7 +138,7 @@ export default function(state = initialBudgetState, action): BudgetState {
                         ...state.annualExpensesInfo,
                         ...reportInfo.annualExpensesInfo,
                     },
-                    results: {},
+                    results: reportInfo.results,
                     reportTitle: reportInfo.reportTitle,
                     currentReportId: reportId,
                 };
