@@ -50,13 +50,21 @@ class HeaderMenu extends Component<HeaderMenuProps, State> {
         const menuRoutes = this.props.menuRoutes;
 
         return (
-            <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+            <Header
+                style={{
+                    position: 'fixed',
+                    zIndex: 1,
+                    width: '100%',
+                    backgroundColor: '#fff',
+                    boxShadow: '0 2px 8px #f0f1f2',
+                }}
+            >
                 <Menu
                     mode="horizontal"
-                    theme="dark"
+                    theme="light"
                     defaultSelectedKeys={['/']}
                     selectedKeys={this.getSelectedKeys()}
-                    style={{ lineHeight: '64px' }}
+                    style={{ lineHeight: '64px', borderBottom: '0' }}
                 >
                     <Menu.Item>
                         <Link to="/">Home</Link>
