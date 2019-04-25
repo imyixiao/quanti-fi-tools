@@ -87,7 +87,7 @@ export const getCompanyMatch = createSelector(
     [getCompensation, getRetirementAccountsInfo],
     (compensation, retirementAccountsInfo: RetirementAccountsInfoInterface) => {
         const companyMatchOfCompensation = round(retirementAccountsInfo.companyMatchOfCompensation) / 100;
-        const companyMatchPortionMax = Math.max(
+        const companyMatchPortionMax = Math.min(
             round(compensation * companyMatchOfCompensation),
             round(retirementAccountsInfo.employee401K),
         );
