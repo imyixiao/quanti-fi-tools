@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "^10",
-    "yarn": "^1",
-    "npm": "^6"
+    "node": "10.x",
+    "yarn": "1.x",
+    "npm": "6.x"
   },
   "dependencies": {
     "@antv/data-set": "^0.10.2",
