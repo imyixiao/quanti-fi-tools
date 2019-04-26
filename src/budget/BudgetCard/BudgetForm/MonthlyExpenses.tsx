@@ -28,7 +28,7 @@ class MonthlyExpenses extends Component<MonthlyExpensesFormProps> {
         const expenseFormItems = _.range(this.props.expensesLength).map(id => (
             <Form.Item key={id}>
                 <Row type="flex" justify="space-between">
-                    <Col lg={12} sm={16} xs={20}>
+                    <Col lg={12} sm={16} xs={22}>
                         <InputGroup compact style={{ float: 'left' }}>
                             {getFieldDecorator(`keys_${id}`, {
                                 rules: [{ required: true, message: 'Please enter expense description' }],
@@ -49,7 +49,7 @@ class MonthlyExpenses extends Component<MonthlyExpensesFormProps> {
                             )}
                         </InputGroup>
                     </Col>
-                    <Col span={4}>
+                    <Col span={2}>
                         <Icon
                             className="dynamic-delete-button"
                             type="minus-circle-o"
