@@ -2,7 +2,6 @@ import * as actionTypes from '../../actions/rental';
 import { ClosingCostBreakDownInterface, RepairCostBreakDownInterface } from '../../../rental/types';
 import { RentalState } from './types';
 import { PurchaseInfoInterface } from '../../../rental/types';
-import _ from 'lodash';
 import { checkNamespace } from 'helpers';
 
 export const initialRentalState: RentalState = {
@@ -239,7 +238,7 @@ export default function(state = initialRentalState, action): RentalState {
                 return { ...state };
             } else {
                 const previousLst = state.rentalPreviousReportList;
-                const reportInfo = _.find(previousLst, { _id: reportId });
+                const reportInfo = previousLst.find(item => item._id === reportId);
                 if (!reportInfo) {
                     return initialRentalState;
                 }

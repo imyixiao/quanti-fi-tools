@@ -18,7 +18,7 @@ export interface RentalState {
     url?: string;
     waitingForValidation?: boolean;
     stepOnValidationSuccess: RentalStep;
-    rentalPreviousReportList: RentalPreviousReportListInterface;
+    rentalPreviousReportList: RentalReportInterface[];
     currentReportId?: string;
     rentalPreviousReportListLoading: boolean;
 }
@@ -31,8 +31,4 @@ export interface RentalReportInterface {
     rentalInfo: RentalInfoInterface;
     closingCostBreakdown: ClosingCostBreakDownInterface;
     repairCostBreakdown: RepairCostBreakDownInterface;
-}
-
-export interface RentalPreviousReportListInterface {
-    [index: number]: RentalReportInterface;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from 'redux/store';
-import { RentalPreviousReportListInterface, RentalReportInterface } from 'redux/reducers/rental/types';
+import { RentalReportInterface } from 'redux/reducers/rental/types';
 import PreviousRentalReportCard from './PreviousRentalReportCard';
 import { List, Empty } from 'antd';
 import { fetchRentalReports } from 'redux/actions/rental';
@@ -56,7 +56,7 @@ interface Dispatch {
 interface StoreState {
     firebaseAuthLoaded: boolean;
     firebaseAuthEmpty: boolean;
-    previousRentalReportList: RentalPreviousReportListInterface;
+    previousRentalReportList: RentalReportInterface[];
     loading: boolean;
 }
 

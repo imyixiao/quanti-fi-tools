@@ -10,7 +10,7 @@ import { round } from 'helpers';
 
 interface Props extends FormComponentProps, StoreState, ReportDataInterface {}
 
-class Report extends Component<Props> {
+class Report extends Component<any, Props> {
     render() {
         const { reportData } = this.props;
         const { loan, subtitles, title } = reportData;

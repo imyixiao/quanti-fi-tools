@@ -66,7 +66,3 @@ export interface BudgetReportInterface {
     annualExpensesInfo: ExpensesInfoInterface;
     results: ResultsInterface;
 }
-
-export interface PreviousBudgetReportsInterface {
-    [index: number]: BudgetReportInterface;
-}

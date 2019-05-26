@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from 'redux/store';
-import { PreviousBudgetReportsInterface, BudgetReportInterface } from '../types';
+import { BudgetReportInterface } from '../types';
 import PreviousBudgetReportCard from './PreviousBudgetReportCard';
 import { List, Empty } from 'antd';
 import { fetchBudgetReports } from 'redux/actions/budget';
@@ -23,6 +23,7 @@ class BudgetPreviousReports extends Component<Props> {
     }
 
     render() {
+        console.log(this.props.previousReports);
         return (
             <div className="previous-reports">
                 <header style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -56,7 +57,7 @@ interface Dispatch {
 interface StoreState {
     firebaseAuthLoaded: boolean;
     firebaseAuthEmpty: boolean;
-    previousReports: PreviousBudgetReportsInterface;
+    previousReports: BudgetReportInterface[];
     loading: boolean;
 }
 

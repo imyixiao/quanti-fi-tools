@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Button, message } from 'antd';
 import { RESET_REPORT, saveNewReport } from 'redux/actions/budget';
-import { FormComponentProps } from 'antd/lib/form/Form';
 import { AppState } from 'redux/store';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { BudgetState } from '../../types';
 import SignInOnlyButton from 'components/SignInOnlyButton';
 
-interface Props extends FormComponentProps, StoreState, Dispatch, RouteComponentProps {}
+interface Props extends StoreState, Dispatch, RouteComponentProps {}
 
 class ReportButtons extends Component<Props> {
     reset = () => {

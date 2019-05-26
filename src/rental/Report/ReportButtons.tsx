@@ -10,7 +10,7 @@ import { RentalState } from 'redux/reducers/rental/types';
 import SignInOnlyButton from 'components/SignInOnlyButton';
 interface Props extends FormComponentProps, StoreState, Dispatch, RouteComponentProps {}
 
-class ReportButtons extends Component<Props> {
+class ReportButtons extends Component<any, Props> {
     applyDefault = () => {
         this.props.applyDefaultToReport();
     };
