@@ -7,6 +7,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import { saveNewReport } from 'redux/actions/rental';
 import { RentalState } from 'redux/reducers/rental/types';
 import SignInOnlyButton from 'components/SignInOnlyButton';
+import DefaultStrategyForm from '../DefaultStrategyForm';
 interface Props extends StoreState, Dispatch, RouteComponentProps {}
 interface State {
     drawerIsOpen: boolean;
@@ -72,10 +73,9 @@ class ReportButtons extends Component<Props, State> {
                     closable={false}
                     onClose={this.closeDefaultDrawer}
                     visible={this.state.drawerIsOpen}
+                    width={500}
                 >
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
+                    <DefaultStrategyForm />
                     <Button
                         type="primary"
                         onClick={() => {
