@@ -51,7 +51,7 @@ class ReportButtons extends Component<Props, State> {
             <Row>
                 <div className="report-buttons">
                     <SignInOnlyButton className="report-button" onClick={this.openDefaultDrawer}>
-                        Set Default Estimations
+                        Set Default Strategy
                     </SignInOnlyButton>
                     <SignInOnlyButton className="report-button" onClick={this.applyDefault}>
                         Apply Default
