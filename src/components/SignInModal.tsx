@@ -1,17 +1,26 @@
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { Button, Modal, message } from 'antd';
+import { Button, Modal, message, Drawer } from 'antd';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import SignInOnlyButton from './SignInOnlyButton';
+import DefaultStrategyForm from 'rental/DefaultStrategyForm';
+import BasicRow from './BasicRow';
 
 interface Props {
     visible?: boolean;
     onCancelModal: any;
 }
 
-export class SignInModal extends React.Component<Props> {
+interface State {
+    isSignedIn: boolean;
+    drawerIsOpen: boolean;
+}
+
+export class SignInModal extends React.Component<Props, State> {
     state = {
         isSignedIn: false,
+        drawerIsOpen: false,
     };
 
     unregisterAuthObserver = () => {};
@@ -45,6 +54,14 @@ export class SignInModal extends React.Component<Props> {
         message.success('Sign Out Successful');
     };
 
+    openDefaultDrawer = () => {
+        this.setState({ drawerIsOpen: true });
+    };
+
+    closeDefaultDrawer = () => {
+        this.setState({ drawerIsOpen: false });
+    };
+
     render() {
         if (!this.state.isSignedIn) {
             return (
@@ -69,7 +86,25 @@ export class SignInModal extends React.Component<Props> {
                     footer={null}
                 >
                     <p>Welcome {user.displayName}! You are now signed-in!</p>
-                    <Button onClick={this.signOut}>Sign-out</Button>
+                    <div style={{ textAlign: 'center' }}>
+                        <SignInOnlyButton className="report-button" onClick={this.openDefaultDrawer}>
+                            Set Default Strategy
+                        </SignInOnlyButton>
+                    </div>
+
+                    <div style={{ textAlign: 'center', marginTop: '12px' }}>
+                        <Button onClick={this.signOut}>Sign-out</Button>
+                    </div>
+                    <Drawer
+                        title="Basic Drawer"
+                        placement="right"
+                        closable={false}
+                        onClose={this.closeDefaultDrawer}
+                        visible={this.state.drawerIsOpen}
+                        width={500}
+                    >
+                        <DefaultStrategyForm onSave={this.closeDefaultDrawer} />
+                    </Drawer>
                 </Modal>
             );
         }
