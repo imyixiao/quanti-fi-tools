@@ -33,12 +33,9 @@ class ReportButtons extends Component<Props> {
                     <Button className="report-button" onClick={this.reset}>
                         Reset Report
                     </Button>
-                    <SignInOnlyButton
-                        type="primary"
-                        className="report-button"
-                        onClick={this.onClickSaveReport}
-                        text="Save Report"
-                    />
+                    <SignInOnlyButton type="primary" className="report-button" onClick={this.onClickSaveReport}>
+                        Save Report
+                    </SignInOnlyButton>
                 </div>
             </Row>
         );

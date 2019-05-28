@@ -26,11 +26,9 @@ class HomePage extends Component {
                                 calculator.
                             </p>
                             <div style={{ textAlign: 'end' }}>
-                                <SignInOnlyButton
-                                    link="/rental-reports"
-                                    style={{ marginRight: '16px' }}
-                                    text="View Previous Reports"
-                                />
+                                <SignInOnlyButton link="/rental-reports" style={{ marginRight: '16px' }}>
+                                    View Previous Reports
+                                </SignInOnlyButton>
                                 <Link to="/rental">
                                     <Button type="primary">New Report</Button>
                                 </Link>
@@ -44,11 +42,9 @@ class HomePage extends Component {
                                 need to pay.
                             </p>
                             <div style={{ textAlign: 'end' }}>
-                                <SignInOnlyButton
-                                    link="/budget-reports"
-                                    style={{ marginRight: '16px' }}
-                                    text="View Previous Budgets"
-                                />
+                                <SignInOnlyButton link="/budget-reports" style={{ marginRight: '16px' }}>
+                                    View Previous Budgets
+                                </SignInOnlyButton>
                                 <Link to="/budget">
                                     <Button type="primary">New Budget</Button>
                                 </Link>

@@ -7,7 +7,7 @@ import { AppState } from 'redux/store';
 interface Props extends StoreState {
     link?: string;
     style?: any;
-    text: string;
+    children?: any;
     onClick?: any;
     type?: 'default' | 'ghost' | 'primary' | 'dashed' | 'danger' | undefined;
     className?: string;
@@ -22,7 +22,7 @@ class SignInOnlyButton extends Component<Props> {
                 return (
                     <Link to={this.props.link} style={this.props.style}>
                         <Button type={buttonType} className={this.props.className}>
-                            {this.props.text}
+                            {this.props.children}
                         </Button>
                     </Link>
                 );
@@ -30,7 +30,7 @@ class SignInOnlyButton extends Component<Props> {
                 return (
                     <Tooltip title="Please sign in first">
                         <Button type={buttonType} className={this.props.className} style={this.props.style} disabled>
-                            {this.props.text}
+                            {this.props.children}
                         </Button>
                     </Tooltip>
                 );
@@ -44,14 +44,14 @@ class SignInOnlyButton extends Component<Props> {
                         onClick={this.props.onClick}
                         style={this.props.style}
                     >
-                        {this.props.text}
+                        {this.props.children}
                     </Button>
                 );
             } else {
                 return (
                     <Tooltip title="Please sign in first">
                         <Button type={buttonType} className={this.props.className} disabled style={this.props.style}>
-                            {this.props.text}
+                            {this.props.children}
                         </Button>
                     </Tooltip>
                 );

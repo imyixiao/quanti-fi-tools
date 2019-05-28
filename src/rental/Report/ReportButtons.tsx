@@ -50,21 +50,18 @@ class ReportButtons extends Component<Props, State> {
         return (
             <Row>
                 <div className="report-buttons">
-                    <SignInOnlyButton
-                        className="report-button"
-                        onClick={this.openDefaultDrawer}
-                        text="Set Default Estimations"
-                    />
-                    <SignInOnlyButton className="report-button" onClick={this.applyDefault} text="Apply Default" />
+                    <SignInOnlyButton className="report-button" onClick={this.openDefaultDrawer}>
+                        Set Default Estimations
+                    </SignInOnlyButton>
+                    <SignInOnlyButton className="report-button" onClick={this.applyDefault}>
+                        Apply Default
+                    </SignInOnlyButton>
                     <Button className="report-button" onClick={this.reset}>
                         Reset Report
                     </Button>
-                    <SignInOnlyButton
-                        type="primary"
-                        className="report-button"
-                        onClick={this.onClickSaveReport}
-                        text="Save Report"
-                    />
+                    <SignInOnlyButton type="primary" className="report-button" onClick={this.onClickSaveReport}>
+                        Save Report
+                    </SignInOnlyButton>
                 </div>
 
                 <Drawer
