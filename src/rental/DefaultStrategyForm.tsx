@@ -8,7 +8,6 @@ import { PURCHASE_LABELS, RENTAL_LABELS } from 'consts/rental';
 import { FormComponentProps } from 'antd/lib/form/Form';
 
 import { mapFieldsToFormFields } from 'helpers';
-import { RENTAL_STEP_VALIDATION_SUCCESS, RENTAL_STEP_VALIDATION_FAILED } from 'redux/actions/rental';
 import FormInputNumber from 'components/FormInputNumber';
 import BasicRow from 'components/BasicRow';
 import { DefaultStrategyInterface } from './types';
@@ -65,6 +64,7 @@ class DefaultStrategyForm extends Component<Props, State> {
     handleSubmit = () => {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                this.props.setDefaultStrategy(values);
                 this.props.submitDefaultStrategy(values);
                 this.props.onSave();
             }
@@ -279,6 +279,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 interface Dispatch {
+    setDefaultStrategy: any;
     submitDefaultStrategy: any;
     dispatchValidationSuccess: any;
     dispatchValidationFailed: any;
@@ -286,15 +287,11 @@ interface Dispatch {
 
 const mapDispatchToProps = dispatch => {
     return {
-        submitDefaultStrategy: (defaultStrategy: DefaultStrategyInterface) => {
+        setDefaultStrategy: (defaultStrategy: DefaultStrategyInterface) => {
             dispatch(setDefaultStrategy(defaultStrategy));
+        },
+        submitDefaultStrategy: (defaultStrategy: DefaultStrategyInterface) => {
             dispatch(saveDefaultStrategy(defaultStrategy));
-        },
-        dispatchValidationSuccess: () => {
-            dispatch({ type: RENTAL_STEP_VALIDATION_SUCCESS });
-        },
-        dispatchValidationFailed: () => {
-            dispatch({ type: RENTAL_STEP_VALIDATION_FAILED });
         },
     };
 };
@@ -305,8 +302,8 @@ export default connect(
 )(
     formWrapper(
         Form.create({
-            onValuesChange(props: Props, changedValues) {
-                // props.submitDefaultStrategy(changedValues);
+            onValuesChange(props: Props & WrappedFormProps, changedValues) {
+                props.setDefaultStrategy(changedValues);
             },
             mapPropsToFields(props: Props) {
                 return mapFieldsToFormFields(props.fields);
