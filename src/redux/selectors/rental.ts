@@ -24,6 +24,9 @@ export const getCurrentRentalReportId = (state: AppState) => state.rental.curren
 
 export const getPreviousRentalReports = (state: AppState) => state.rental.rentalPreviousReportList;
 
+export const getDefaultStrategy = (state: AppState) =>
+    state && state.rental.defaultStrategy ? state.rental.defaultStrategy : {};
+
 const checkNumber = (num: any) => (num === undefined ? 0 : num);
 
 const getReportTitle = ({ rental }: { rental: RentalState }) => {

@@ -32,6 +32,8 @@ export const FETCH_RENTAL_REPORTS_FAILED = setRentalNamespace('FETCH_RENTAL_REPO
 export const POPULATE_RENTAL_CARD = setRentalNamespace('POPULATE_RENTAL_CARD');
 export const POPULATE_RENTAL_CARD_ASYNC = setRentalNamespace('POPULATE_RENTAL_CARD_ASYNC');
 
+export const SET_DEFAULT_STRATEGY = setRentalNamespace('SET_DEFAULT_STRATEGY');
+
 // actions
 export const setPropertyInfo = propertyInfo => ({ type: SET_PROPERTY_INFO, payload: { propertyInfo } });
 export const setPurchaseInfo = purchaseInfo => ({ type: SET_PURCHASE_INFO, payload: { purchaseInfo } });
@@ -85,3 +87,5 @@ export const fetchRentalReports = (ids?: string[]) => ({
     type: FETCH_RENTAL_REPORTS,
     payload: { ids },
 });
+
+export const setDefaultStrategy = defaultStrategy => ({ type: SET_DEFAULT_STRATEGY, payload: { defaultStrategy } });

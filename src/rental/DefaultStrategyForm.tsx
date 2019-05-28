@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Checkbox, Row, Col } from 'antd';
-import { setPurchaseInfo } from 'redux/actions/rental';
-import { getPurchaseInfo, getRentalStep } from 'redux/selectors';
+import { Form, Checkbox, Row, Col, Button } from 'antd';
+import { setDefaultStrategy } from 'redux/actions/rental';
+import { getDefaultStrategy } from 'redux/selectors';
 import { PURCHASE_LABELS, RENTAL_LABELS } from 'consts/rental';
 
 import { FormComponentProps } from 'antd/lib/form/Form';
 
 import ClosingCostModal from './RentalCard/PurchaseInfoForm/ClosingCostModal';
 import RepairCostModal from './RentalCard/PurchaseInfoForm/RepairCostModal';
-import { mapPropsToForm } from 'helpers';
+import { mapFieldsToFormFields } from 'helpers';
 import { RENTAL_STEP_VALIDATION_SUCCESS, RENTAL_STEP_VALIDATION_FAILED } from 'redux/actions/rental';
 import FormInputNumber from 'components/FormInputNumber';
 import BasicRow from 'components/BasicRow';
-import { PurchaseInfoInterface, RentalStep } from './types';
+import { DefaultStrategyInterface } from './types';
 import { AppState } from 'redux/store';
 import formWrapper, { WrappedFormProps } from 'components/FormWrapper';
 
@@ -45,12 +45,13 @@ const {
     AMORTIZED_YEARS,
 } = PURCHASE_LABELS;
 
-interface Props extends FormComponentProps, Dispatch, StoreState, WrappedFormProps {}
+interface Props extends FormComponentProps, Dispatch, StoreState, WrappedFormProps {
+    onSave: any;
+}
 
 interface State {
     closingCostModalVisible: boolean;
     repairCostModalVisible: boolean;
-    waitingForValidation: boolean;
 }
 
 class DefaultStrategyForm extends Component<Props, State> {
@@ -59,33 +60,7 @@ class DefaultStrategyForm extends Component<Props, State> {
         this.state = {
             closingCostModalVisible: false,
             repairCostModalVisible: false,
-            waitingForValidation: false,
         };
-    }
-
-    static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-        if (nextProps.waitingForValidation && nextProps.step === 1) {
-            return {
-                ...prevState,
-                waitingForValidation: true,
-            };
-        }
-        return null;
-    }
-
-    componentDidUpdate() {
-        if (this.state.waitingForValidation) {
-            this.props.form.validateFieldsAndScroll(error => {
-                if (error) {
-                    this.props.dispatchValidationFailed();
-                } else {
-                    this.props.dispatchValidationSuccess();
-                }
-            });
-            this.setState({
-                waitingForValidation: false,
-            });
-        }
     }
 
     showClosingCostModal = e => {
@@ -115,9 +90,11 @@ class DefaultStrategyForm extends Component<Props, State> {
     };
 
     handleSubmit = () => {
-        this.props.form.validateFields((err, values) => {
-            // if (!err) {}
-            this.props.submitPurchaseInfo(values);
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                this.props.submitDefaultStrategy(values);
+                this.props.onSave();
+            }
         });
     };
 
@@ -340,33 +317,34 @@ class DefaultStrategyForm extends Component<Props, State> {
                         </BasicRow>
                     </>
                 )}
+                <BasicRow>
+                    <Button type="primary" onClick={this.handleSubmit}>
+                        Save
+                    </Button>
+                </BasicRow>
             </Form>
         );
     }
 }
 
 interface StoreState {
-    purchaseInfo?: PurchaseInfoInterface;
-    waitingForValidation?: boolean;
-    step: RentalStep;
+    defaultStrategy?: DefaultStrategyInterface;
 }
 
 const mapStateToProps = (state: AppState) => ({
-    purchaseInfo: getPurchaseInfo(state),
-    waitingForValidation: state.rental.waitingForValidation,
-    step: getRentalStep(state),
+    defaultStrategy: getDefaultStrategy(state),
 });
 
 interface Dispatch {
-    submitPurchaseInfo: any;
+    submitDefaultStrategy: any;
     dispatchValidationSuccess: any;
     dispatchValidationFailed: any;
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        submitPurchaseInfo: (purchaseInfo: PurchaseInfoInterface) => {
-            dispatch(setPurchaseInfo(purchaseInfo));
+        submitDefaultStrategy: (purchaseInfo: DefaultStrategyInterface) => {
+            dispatch(setDefaultStrategy(purchaseInfo));
         },
         dispatchValidationSuccess: () => {
             dispatch({ type: RENTAL_STEP_VALIDATION_SUCCESS });
@@ -384,15 +362,15 @@ export default connect(
     formWrapper(
         Form.create({
             onValuesChange(props: Props, changedValues) {
-                props.submitPurchaseInfo(changedValues);
+                // props.submitDefaultStrategy(changedValues);
             },
             mapPropsToFields(props: Props) {
-                return mapPropsToForm(props.purchaseInfo);
+                return mapFieldsToFormFields(props.fields);
             },
             onFieldsChange(props, changedFields) {
                 props.handleFormChange(changedFields);
             },
         })(DefaultStrategyForm),
-        props => props.purchaseInfo,
+        props => props.defaultStrategy,
     ),
 );

@@ -16,6 +16,7 @@ export const initialRentalState: RentalState = {
     rentalPreviousReportList: [],
     rentalPreviousReportListLoading: false,
     currentReportId: '',
+    defaultStrategy: {},
 };
 
 export default function(state = initialRentalState, action): RentalState {

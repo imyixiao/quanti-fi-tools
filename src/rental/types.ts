@@ -121,3 +121,23 @@ export enum RentalStep {
     RentalInfo,
     Report,
 }
+
+export interface DefaultStrategyInterface {
+    closingCost?: number;
+    repairCost?: number;
+    downPayment?: number;
+    loanInterestRate?: number;
+    wrapLoanFeesIntoLoan?: boolean;
+    amortizedYears?: number;
+    waterAndSewer?: number;
+    garbage?: number;
+    monthlyInsurance?: number;
+    vacancy?: number;
+    maintenance?: number;
+    capex?: number;
+    managementFees?: number;
+    annualIncomeGrowth?: number;
+    annualPvGrowth?: number;
+    annualExpensesGrowth?: number;
+    salesExpenses?: number;
+}

@@ -75,15 +75,7 @@ class ReportButtons extends Component<Props, State> {
                     visible={this.state.drawerIsOpen}
                     width={500}
                 >
-                    <DefaultStrategyForm />
-                    <Button
-                        type="primary"
-                        onClick={() => {
-                            this.closeDefaultDrawer();
-                        }}
-                    >
-                        Save
-                    </Button>
+                    <DefaultStrategyForm onSave={this.closeDefaultDrawer} />
                 </Drawer>
             </Row>
         );
