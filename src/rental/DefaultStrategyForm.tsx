@@ -7,8 +7,6 @@ import { PURCHASE_LABELS, RENTAL_LABELS } from 'consts/rental';
 
 import { FormComponentProps } from 'antd/lib/form/Form';
 
-import ClosingCostModal from './RentalCard/PurchaseInfoForm/ClosingCostModal';
-import RepairCostModal from './RentalCard/PurchaseInfoForm/RepairCostModal';
 import { mapFieldsToFormFields } from 'helpers';
 import { RENTAL_STEP_VALIDATION_SUCCESS, RENTAL_STEP_VALIDATION_FAILED } from 'redux/actions/rental';
 import FormInputNumber from 'components/FormInputNumber';
@@ -63,32 +61,6 @@ class DefaultStrategyForm extends Component<Props, State> {
         };
     }
 
-    showClosingCostModal = e => {
-        e.preventDefault();
-        this.setState({
-            closingCostModalVisible: true,
-        });
-    };
-
-    showRepairCostModal = e => {
-        e.preventDefault();
-        this.setState({
-            repairCostModalVisible: true,
-        });
-    };
-
-    toggleClosingCostModal = (visible: boolean) => {
-        this.setState({
-            closingCostModalVisible: visible,
-        });
-    };
-
-    toggleRepairCostModal = (visible: boolean) => {
-        this.setState({
-            repairCostModalVisible: visible,
-        });
-    };
-
     handleSubmit = () => {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
@@ -110,39 +82,15 @@ class DefaultStrategyForm extends Component<Props, State> {
             <Form layout="vertical" className="stepForm" onSubmit={this.handleSubmit}>
                 <BasicRow>
                     <Col lg={12} xs={24}>
-                        <Form.Item
-                            label={CLOSING_COST}
-                            extra={
-                                <p className="closing-cost-extra">
-                                    Enter the total value or provide a{' '}
-                                    <a onClick={this.showClosingCostModal}>cost breakdown</a>.
-                                </p>
-                            }
-                        >
+                        <Form.Item label={CLOSING_COST}>
                             {getFieldDecorator('closingCost', {})(<FormInputNumber dollar />)}
                         </Form.Item>
-                        <ClosingCostModal
-                            visible={this.state.closingCostModalVisible}
-                            toggleModal={this.toggleClosingCostModal}
-                        />
                     </Col>
 
                     <Col lg={12} xs={24}>
-                        <Form.Item
-                            label={REPAIR_COST}
-                            extra={
-                                <p className="closing-cost-extra">
-                                    Enter the total value or provide a{' '}
-                                    <a onClick={this.showRepairCostModal}>cost breakdown</a>.
-                                </p>
-                            }
-                        >
+                        <Form.Item label={REPAIR_COST}>
                             {getFieldDecorator('repairCost', {})(<FormInputNumber dollar />)}
                         </Form.Item>
-                        <RepairCostModal
-                            visible={this.state.repairCostModalVisible}
-                            toggleModal={this.toggleRepairCostModal}
-                        />
                     </Col>
                 </BasicRow>
 
