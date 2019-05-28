@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Button, message } from 'antd';
+import { Row, Button, message, Drawer } from 'antd';
 import { RESET_REPORT, APPLY_DEFAULT_TO_REPORT } from 'redux/actions/rental';
-import { FormComponentProps } from 'antd/lib/form/Form';
 import { AppState } from 'redux/store';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { saveNewReport } from 'redux/actions/rental';
 import { RentalState } from 'redux/reducers/rental/types';
 import SignInOnlyButton from 'components/SignInOnlyButton';
-interface Props extends FormComponentProps, StoreState, Dispatch, RouteComponentProps {}
+import DefaultStrategyForm from '../DefaultStrategyForm';
+interface Props extends StoreState, Dispatch, RouteComponentProps {}
+interface State {
+    drawerIsOpen: boolean;
+}
 
-class ReportButtons extends Component<any, Props> {
+class ReportButtons extends Component<Props, State> {
+    state = {
+        drawerIsOpen: false,
+    };
+
     applyDefault = () => {
         this.props.applyDefaultToReport();
     };
@@ -31,13 +38,24 @@ class ReportButtons extends Component<any, Props> {
         this.props.saveReport(this.onSaveReportSuccess, this.onSaveReportFailure, this.props.rental);
     };
 
+    openDefaultDrawer = () => {
+        this.setState({ drawerIsOpen: true });
+    };
+
+    closeDefaultDrawer = () => {
+        this.setState({ drawerIsOpen: false });
+    };
+
     render() {
         return (
             <Row>
                 <div className="report-buttons">
-                    <Button className="report-button" onClick={this.applyDefault}>
-                        Apply Default
-                    </Button>
+                    <SignInOnlyButton
+                        className="report-button"
+                        onClick={this.openDefaultDrawer}
+                        text="Set Default Estimations"
+                    />
+                    <SignInOnlyButton className="report-button" onClick={this.applyDefault} text="Apply Default" />
                     <Button className="report-button" onClick={this.reset}>
                         Reset Report
                     </Button>
@@ -48,6 +66,17 @@ class ReportButtons extends Component<any, Props> {
                         text="Save Report"
                     />
                 </div>
+
+                <Drawer
+                    title="Basic Drawer"
+                    placement="right"
+                    closable={false}
+                    onClose={this.closeDefaultDrawer}
+                    visible={this.state.drawerIsOpen}
+                    width={500}
+                >
+                    <DefaultStrategyForm onSave={this.closeDefaultDrawer} />
+                </Drawer>
             </Row>
         );
     }

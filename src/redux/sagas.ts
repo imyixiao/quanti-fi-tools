@@ -132,11 +132,41 @@ function* populateBudgetCardAsync(action) {
     yield put({ type: budgetActionTypes.POPULATE_BUDGET_CARD, payload: action.payload });
 }
 
+function* saveDefaultStrategy(action) {
+    const { defaultStrategy } = action.payload;
+    const idToken = yield select(getFirebaseIDToken);
+    try {
+        const defaultStrategyClone = _.cloneDeep(defaultStrategy);
+        const res = yield call(rentalAPI.saveDefaultStrategy, idToken, defaultStrategyClone);
+        if (res.data.type === 'error') {
+            throw new Error(res.data.message);
+        }
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
+function* fetchDefaultStrategy(action) {
+    const idToken = yield select(getFirebaseIDToken);
+    try {
+        const res = yield call(rentalAPI.fetchDefaultStrategy, idToken);
+        if (res.data.type === 'error') {
+            throw new Error(res.data.message);
+        }
+        const { defaultStrategy } = res.data;
+        yield put({ type: rentalActionTypes.FETCH_DEFAULT_STRATEGY_SUCCEEDED, payload: { data: defaultStrategy } });
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
 function* mySaga() {
     yield takeLatest(rentalActionTypes.WEBSITE_FETCH_REQUESTED, fetchWebsite);
     yield takeLatest(rentalActionTypes.SAVE_REPORT, saveRentalReport);
     yield takeLatest(rentalActionTypes.FETCH_RENTAL_REPORTS, fetchRentalReports);
     yield takeEvery(rentalActionTypes.POPULATE_RENTAL_CARD_ASYNC, populateRentalCardAsync);
+    yield takeLatest(rentalActionTypes.SAVE_DEFAULT_STRATEGY, saveDefaultStrategy);
+    yield takeEvery(rentalActionTypes.FETCH_DEFAULT_STRATEGY, fetchDefaultStrategy);
 
     yield takeLatest(budgetActionTypes.SAVE_REPORT, saveBudgetReport);
     yield takeLatest(budgetActionTypes.FETCH_BUDGET_REPORTS, fetchBudgetReports);

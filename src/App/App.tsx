@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import RentalCard from '../rental/RentalCard';
@@ -9,6 +10,8 @@ import HomePage from '../HomePage/HomePage';
 import RentalPreviousReports from '../rental/PreviousReports/RentalPreviousReports';
 import BudgetCard from '../budget/BudgetCard';
 import PreviousBudgetReports from '../budget/PreviousReports/PreviousBudgetReports';
+import { fetchDefaultStrategy } from 'redux/actions/rental';
+import { AppState } from 'redux/store';
 
 const { Content } = Layout;
 
@@ -48,7 +51,24 @@ const menuRoutes: MenuRoute[] = [
     },
 ];
 
-class App extends Component {
+interface Props {
+    fetchDefaultStrategy: any;
+    firebaseAuthLoaded: boolean;
+}
+
+class App extends Component<Props> {
+    componentDidMount() {
+        if (this.props.firebaseAuthLoaded) {
+            this.props.fetchDefaultStrategy();
+        }
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (!prevProps.firebaseAuthLoaded && this.props.firebaseAuthLoaded) {
+            this.props.fetchDefaultStrategy();
+        }
+    }
+
     render() {
         return (
             <Router>
@@ -75,4 +95,19 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state: AppState) => ({
+    firebaseAuthLoaded: state.firebase.auth.isLoaded,
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchDefaultStrategy: () => {
+            dispatch(fetchDefaultStrategy());
+        },
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(App);

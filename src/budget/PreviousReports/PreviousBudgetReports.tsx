@@ -23,7 +23,6 @@ class BudgetPreviousReports extends Component<Props> {
     }
 
     render() {
-        console.log(this.props.previousReports);
         return (
             <div className="previous-reports">
                 <header style={{ textAlign: 'center', marginBottom: '40px' }}>

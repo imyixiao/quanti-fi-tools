@@ -5,6 +5,7 @@ import {
     PurchaseInfoInterface,
     RentalInfoInterface,
     RentalStep,
+    DefaultStrategyInterface,
 } from '../../../rental/types';
 
 export interface RentalState {
@@ -21,6 +22,8 @@ export interface RentalState {
     rentalPreviousReportList: RentalReportInterface[];
     currentReportId?: string;
     rentalPreviousReportListLoading: boolean;
+
+    defaultStrategy: DefaultStrategyInterface;
 }
 
 export interface RentalReportInterface {
