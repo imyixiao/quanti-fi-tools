@@ -46,6 +46,16 @@ class HeaderMenu extends Component<HeaderMenuProps, State> {
         }));
     };
 
+    handleClick = e => {
+        switch (e.key) {
+            case 'user':
+                this.onClickUser();
+                break;
+            default:
+                return;
+        }
+    };
+
     render() {
         const menuRoutes = this.props.menuRoutes;
 
@@ -65,6 +75,7 @@ class HeaderMenu extends Component<HeaderMenuProps, State> {
                     defaultSelectedKeys={['/']}
                     selectedKeys={this.getSelectedKeys()}
                     style={{ lineHeight: '64px', borderBottom: '0' }}
+                    onClick={this.handleClick}
                 >
                     <Menu.Item>
                         <Link to="/">Home</Link>
@@ -78,8 +89,8 @@ class HeaderMenu extends Component<HeaderMenuProps, State> {
                             ))}
                         </SubMenu>
                     ))}
-                    <Menu.Item style={{ float: 'right' }}>
-                        <Icon onClick={this.onClickUser} type="user" />
+                    <Menu.Item key="user" style={{ float: 'right' }}>
+                        <Icon type="user" />
                     </Menu.Item>
                 </Menu>
                 <SignInModal visible={this.state.signInModalVisible} onCancelModal={this.onCancelModal} />
