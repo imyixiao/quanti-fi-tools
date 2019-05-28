@@ -164,16 +164,12 @@ class DefaultStrategyForm extends Component<Props, State> {
                         <BasicRow>
                             <Col lg={12} xs={24}>
                                 <Form.Item label={DOWN_PAYMENT}>
-                                    {getFieldDecorator('downPayment', {
-                                        rules: [{ required: true }],
-                                    })(<FormInputNumber percentage />)}
+                                    {getFieldDecorator('downPayment', {})(<FormInputNumber percentage />)}
                                 </Form.Item>
                             </Col>
                             <Col lg={12} xs={24}>
                                 <Form.Item label={LOAN_INTEREST_RATE}>
-                                    {getFieldDecorator('loanInterestRate', {
-                                        rules: [{ required: true }],
-                                    })(<FormInputNumber percentage />)}
+                                    {getFieldDecorator('loanInterestRate', {})(<FormInputNumber percentage />)}
                                 </Form.Item>
                             </Col>
                         </BasicRow>
@@ -203,9 +199,7 @@ class DefaultStrategyForm extends Component<Props, State> {
 
                         <Row>
                             <Form.Item label={AMORTIZED_YEARS}>
-                                {getFieldDecorator('amortizedYears', {
-                                    rules: [{ required: true }],
-                                })(<FormInputNumber />)}
+                                {getFieldDecorator('amortizedYears', {})(<FormInputNumber />)}
                             </Form.Item>
                         </Row>
 
