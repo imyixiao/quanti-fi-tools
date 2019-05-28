@@ -216,9 +216,13 @@ export default function(state = initialRentalState, action): RentalState {
                 },
                 rentalInfo: {
                     ...state.rentalInfo,
+                    electricity: defaultStrat.electricity,
                     waterAndSewer: defaultStrat.waterAndSewer,
+                    pmi: defaultStrat.pmi,
                     garbage: defaultStrat.garbage,
+                    hoa: defaultStrat.hoa,
                     monthlyInsurance: defaultStrat.monthlyInsurance,
+                    otherMonthlyExpenses: defaultStrat.otherMonthlyExpenses,
                     vacancy: defaultStrat.vacancy,
                     maintenance: defaultStrat.maintenance,
                     capex: defaultStrat.capex,

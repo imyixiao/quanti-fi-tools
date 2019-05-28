@@ -129,9 +129,13 @@ export interface DefaultStrategyInterface {
     loanInterestRate?: number;
     wrapLoanFeesIntoLoan?: boolean;
     amortizedYears?: number;
+    electricity?: number;
     waterAndSewer?: number;
+    pmi?: number;
     garbage?: number;
+    hoa?: number;
     monthlyInsurance?: number;
+    otherMonthlyExpenses?: number;
     vacancy?: number;
     maintenance?: number;
     capex?: number;
