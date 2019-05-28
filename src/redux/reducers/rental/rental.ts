@@ -16,7 +16,25 @@ export const initialRentalState: RentalState = {
     rentalPreviousReportList: [],
     rentalPreviousReportListLoading: false,
     currentReportId: '',
-    defaultStrategy: {},
+    defaultStrategy: {
+        closingCost: 2500,
+        repairCost: 1000,
+        downPayment: 20,
+        loanInterestRate: 4.75,
+        wrapLoanFeesIntoLoan: false,
+        amortizedYears: 30,
+        waterAndSewer: 75,
+        garbage: 20,
+        monthlyInsurance: 100,
+        vacancy: 5,
+        maintenance: 6,
+        capex: 6,
+        managementFees: 5,
+        annualIncomeGrowth: 2,
+        annualPvGrowth: 2,
+        annualExpensesGrowth: 2,
+        salesExpenses: 9,
+    },
 };
 
 export default function(state = initialRentalState, action): RentalState {
@@ -182,32 +200,33 @@ export default function(state = initialRentalState, action): RentalState {
             const purchasePrice = state.purchaseInfo.listingPrice
                 ? state.purchaseInfo.listingPrice
                 : state.purchaseInfo.purchasePrice;
+            const defaultStrat = state.defaultStrategy;
             return {
                 ...state,
                 purchaseInfo: {
                     ...state.purchaseInfo,
                     purchasePrice: purchasePrice,
                     afterRepairValue: purchasePrice,
-                    closingCost: 2500,
-                    repairCost: 1000,
-                    downPayment: 20,
-                    loanInterestRate: 4.75,
-                    wrapLoanFeesIntoLoan: false,
-                    amortizedYears: 30,
+                    closingCost: defaultStrat.closingCost,
+                    repairCost: defaultStrat.repairCost,
+                    downPayment: defaultStrat.downPayment,
+                    loanInterestRate: defaultStrat.loanInterestRate,
+                    wrapLoanFeesIntoLoan: defaultStrat.wrapLoanFeesIntoLoan,
+                    amortizedYears: defaultStrat.amortizedYears,
                 },
                 rentalInfo: {
                     ...state.rentalInfo,
-                    waterAndSewer: 75,
-                    garbage: 20,
-                    monthlyInsurance: 100,
-                    vacancy: 5,
-                    maintenance: 6,
-                    capex: 6,
-                    managementFees: 5,
-                    annualIncomeGrowth: 2,
-                    annualPvGrowth: 2,
-                    annualExpensesGrowth: 2,
-                    salesExpenses: 9,
+                    waterAndSewer: defaultStrat.waterAndSewer,
+                    garbage: defaultStrat.garbage,
+                    monthlyInsurance: defaultStrat.monthlyInsurance,
+                    vacancy: defaultStrat.vacancy,
+                    maintenance: defaultStrat.maintenance,
+                    capex: defaultStrat.capex,
+                    managementFees: defaultStrat.managementFees,
+                    annualIncomeGrowth: defaultStrat.annualIncomeGrowth,
+                    annualPvGrowth: defaultStrat.annualPvGrowth,
+                    annualExpensesGrowth: defaultStrat.annualExpensesGrowth,
+                    salesExpenses: defaultStrat.salesExpenses,
                 },
             };
         }
