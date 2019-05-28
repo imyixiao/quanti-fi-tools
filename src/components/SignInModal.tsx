@@ -5,7 +5,6 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import SignInOnlyButton from './SignInOnlyButton';
 import DefaultStrategyForm from 'rental/DefaultStrategyForm';
-import BasicRow from './BasicRow';
 
 interface Props {
     visible?: boolean;
