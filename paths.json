@@ -1,12 +1,12 @@
-{
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "components/*": ["src/components/*"],
-            "redux/*": ["src/redux/*"],
-            "helpers": ["src/helpers"],
-            "api/*": ["src/api/*"],
-            "consts/*": ["src/consts/*"]
-        }
-    }
-}
+// {
+//     "compilerOptions": {
+//         "baseUrl": "src",
+//         // "paths": {
+//         //     "components/*": ["components/*"],
+//         //     "redux/*": ["redux/*"],
+//         //     "helpers": ["helpers"],
+//         //     "api/*": ["api/*"],
+//         //     "consts/*": ["consts/*"]
+//         // }
+//     }
+// }

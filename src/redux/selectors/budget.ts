@@ -1,6 +1,6 @@
 import { federalTaxBuckets, federalStandardDeduction } from 'consts/budget';
 import { RetirementAccountsInfoInterface, TaxInfoInterface, ResultsInterface } from './../../budget/types';
-import { ExpensesInfoInterface } from 'src/budget/types';
+import { ExpensesInfoInterface } from 'budget/types';
 import { AppState } from '../store';
 import { createSelector } from 'reselect';
 import { round, calculateIncomeTaxForState } from 'helpers';

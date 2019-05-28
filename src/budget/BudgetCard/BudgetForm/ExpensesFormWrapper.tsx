@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ExpensesInfoInterface } from 'src/budget/types';
+import { ExpensesInfoInterface } from '../../types';
 
 export interface ExpensesStoreState {
     expensesInfo: ExpensesInfoInterface;
