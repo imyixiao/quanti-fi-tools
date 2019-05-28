@@ -276,6 +276,21 @@ export default function(state = initialRentalState, action): RentalState {
                 currentReportId: id,
             };
         }
+        case actionTypes.FETCH_DEFAULT_STRATEGY_SUCCEEDED: {
+            const defaultStrategies = action.payload.data;
+            if (!defaultStrategies) return state;
+            return {
+                ...state,
+                defaultStrategy: defaultStrategies[0],
+            };
+        }
+        case actionTypes.SET_DEFAULT_STRATEGY: {
+            const { defaultStrategy } = action.payload;
+            return {
+                ...state,
+                defaultStrategy,
+            };
+        }
         default:
             return state;
     }

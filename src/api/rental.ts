@@ -23,3 +23,22 @@ export async function saveReport(idToken: string, reportInfo) {
         },
     });
 }
+
+export async function fetchDefaultStrategy(idToken: string) {
+    const url = serverURL + '/fetch-default-strategy';
+    return axios(url, {
+        method: 'post',
+        data: { idToken },
+    });
+}
+
+export async function saveDefaultStrategy(idToken: string, defaultStrategy) {
+    const saveDefaultStrategyUrl = serverURL + '/save-default-strategy';
+    return axios(saveDefaultStrategyUrl, {
+        method: 'post',
+        data: {
+            defaultStrategy,
+            idToken,
+        },
+    });
+}

@@ -14,6 +14,7 @@ import BasicRow from 'components/BasicRow';
 import { DefaultStrategyInterface } from './types';
 import { AppState } from 'redux/store';
 import formWrapper, { WrappedFormProps } from 'components/FormWrapper';
+import { saveDefaultStrategy } from 'redux/actions/rental';
 
 const {
     ELECTRICITY,
@@ -285,8 +286,9 @@ interface Dispatch {
 
 const mapDispatchToProps = dispatch => {
     return {
-        submitDefaultStrategy: (purchaseInfo: DefaultStrategyInterface) => {
-            dispatch(setDefaultStrategy(purchaseInfo));
+        submitDefaultStrategy: (defaultStrategy: DefaultStrategyInterface) => {
+            dispatch(setDefaultStrategy(defaultStrategy));
+            dispatch(saveDefaultStrategy(defaultStrategy));
         },
         dispatchValidationSuccess: () => {
             dispatch({ type: RENTAL_STEP_VALIDATION_SUCCESS });
