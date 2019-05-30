@@ -60,10 +60,11 @@ class PreviousRentalReportCard extends Component<Props, State> {
     }
 
     render() {
-        const { address, linkToPath, numOfMonthAgo, purchasePrice, cashflow } = this.state;
+        const { reportId, address, linkToPath, numOfMonthAgo, purchasePrice, cashflow } = this.state;
 
         return (
             <PreviousReportCard
+                reportId={reportId}
                 address={address}
                 linkToPath={linkToPath}
                 numOfMonthAgo={numOfMonthAgo}

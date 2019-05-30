@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Card, Row, Col } from 'antd';
+import { Card, Row, Col, Button, Icon, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import { round } from 'helpers';
 import { getColorForStatus, getStatusForCashflow, addThousandSeparatorForNumber } from 'helpers';
 
 interface Props {
+    reportId?: string;
     address?: string;
     linkToPath: string;
     numOfMonthAgo: number;
@@ -13,11 +14,16 @@ interface Props {
 }
 
 class PreviousReportCard extends Component<Props> {
+    confirmDeleteRentalReport = () => {
+        console.log('delete!');
+        console.log(this.props.reportId);
+    };
+
     render() {
         return (
             <Card style={{ width: '100%' }}>
                 <Row>
-                    <Col lg={12} xs={24}>
+                    <Col span={10}>
                         <Link to={this.props.linkToPath}>
                             <h3 style={{ lineHeight: '30px' }}>{this.props.address}</h3>
                         </Link>
@@ -27,7 +33,7 @@ class PreviousReportCard extends Component<Props> {
                                 (this.props.numOfMonthAgo > 1 ? ' months ago' : ' month ago')}
                         </p>
                     </Col>
-                    <Col lg={6} xs={24}>
+                    <Col span={6}>
                         <p
                             style={{
                                 fontSize: '24px',
@@ -40,7 +46,7 @@ class PreviousReportCard extends Component<Props> {
 
                         <p>Purchase Price</p>
                     </Col>
-                    <Col lg={6} xs={12}>
+                    <Col span={6}>
                         <p
                             style={{
                                 color: getColorForStatus(getStatusForCashflow(this.props.cashflow)),
@@ -53,6 +59,18 @@ class PreviousReportCard extends Component<Props> {
                         </p>
 
                         <p>Cashflow</p>
+                    </Col>
+                    <Col span={2}>
+                        <Popconfirm
+                            title="Are you sure delete this report?"
+                            onConfirm={this.confirmDeleteRentalReport}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <Button type="danger">
+                                <Icon type="delete" />
+                            </Button>
+                        </Popconfirm>
                     </Col>
                 </Row>
             </Card>
