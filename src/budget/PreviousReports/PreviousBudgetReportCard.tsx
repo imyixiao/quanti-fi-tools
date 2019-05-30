@@ -8,19 +8,7 @@ interface Props {
     reportInfo: BudgetReportInterface;
 }
 
-interface State {
-    reportId?: string;
-    address?: string;
-    linkToPath: string;
-    numOfMonthAgo: number;
-    purchasePrice?: number;
-    cashflow?: number;
-    arv?: number;
-    noi?: number;
-    monthlyIncome?: number;
-}
-
-class PreviousBudgetReportCard extends Component<Props, State> {
+class PreviousBudgetReportCard extends Component<Props> {
     render() {
         return (
             <Card style={{ width: '100%' }}>
