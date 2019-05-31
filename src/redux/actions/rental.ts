@@ -31,6 +31,7 @@ export const FETCH_RENTAL_REPORTS_SUCCEEDED = setRentalNamespace('FETCH_RENTAL_R
 export const FETCH_RENTAL_REPORTS_FAILED = setRentalNamespace('FETCH_RENTAL_REPORTS_FAILED');
 export const POPULATE_RENTAL_CARD = setRentalNamespace('POPULATE_RENTAL_CARD');
 export const POPULATE_RENTAL_CARD_ASYNC = setRentalNamespace('POPULATE_RENTAL_CARD_ASYNC');
+export const DELETE_REPORT = setRentalNamespace('DELETE_REPORT')
 
 export const SET_DEFAULT_STRATEGY = setRentalNamespace('SET_DEFAULT_STRATEGY');
 export const SAVE_DEFAULT_STRATEGY = setRentalNamespace('SAVE_DEFAULT_STRATEGY');
@@ -77,6 +78,10 @@ export const rentalNextStep = (mobile: boolean) => ({ type: RENTAL_NEXT_STEP, mo
 
 export const saveNewReport = (onSuccess, onFailure, reportInfo) => {
     return { type: SAVE_REPORT, payload: { onSuccess, onFailure, reportInfo } };
+};
+
+export const deleteReport = (onSuccess, onFailure, reportId) => {
+    return { type: DELETE_REPORT, payload: { onSuccess, onFailure, reportId} };
 };
 
 export const populateRentalCardAction = (reportId: string) => ({

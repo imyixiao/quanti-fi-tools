@@ -51,6 +51,21 @@ function* saveRentalReport(action) {
     }
 }
 
+function* deleteRentalReport(action) {
+    const { onSuccess, onFailure, reportId} = action.payload;
+    const idToken = yield select(getFirebaseIDToken);
+    try {
+        const res = yield call(rentalAPI.deleteReport, idToken, reportId);
+        if (res.data.type === 'error') {
+            throw new Error(res.data.message);
+        }
+        onSuccess();
+        yield put(rentalActions.fetchRentalReports());
+    } catch (e) {
+        onFailure(e);
+    }
+}
+
 function* fetchRentalReports(action) {
     const { ids } = action.payload;
     const idToken = yield select(getFirebaseIDToken);
@@ -167,6 +182,7 @@ function* mySaga() {
     yield takeEvery(rentalActionTypes.POPULATE_RENTAL_CARD_ASYNC, populateRentalCardAsync);
     yield takeLatest(rentalActionTypes.SAVE_DEFAULT_STRATEGY, saveDefaultStrategy);
     yield takeEvery(rentalActionTypes.FETCH_DEFAULT_STRATEGY, fetchDefaultStrategy);
+    yield takeLatest(rentalActionTypes.DELETE_REPORT, deleteRentalReport);
 
     yield takeLatest(budgetActionTypes.SAVE_REPORT, saveBudgetReport);
     yield takeLatest(budgetActionTypes.FETCH_BUDGET_REPORTS, fetchBudgetReports);

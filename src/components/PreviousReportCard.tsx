@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Button, Icon, Popconfirm } from 'antd';
+import { Card, Row, Col, Button, Icon, Popconfirm, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { round } from 'helpers';
 import { getColorForStatus, getStatusForCashflow, addThousandSeparatorForNumber } from 'helpers';
+import { connect } from 'react-redux';
+import { deleteReport } from 'redux/actions/rental';
 
-interface Props {
+interface Props extends Dispatch {
     reportId?: string;
     address?: string;
     linkToPath: string;
@@ -14,9 +16,18 @@ interface Props {
 }
 
 class PreviousReportCard extends Component<Props> {
-    confirmDeleteRentalReport = () => {
-        console.log('delete!');
-        console.log(this.props.reportId);
+    onDeleteReportSuccess = () => {
+        const msg = 'Delete report of ' + this.props.address + ' succeeded!'
+        message.success(msg);
+    };
+
+    onDeleteReportFailure = e => {
+        const msg = 'Delete report of ' + this.props.address + ' failed: ' + e.message
+        message.error(msg);
+    };
+
+    onConfirmDeleteReport = () => {
+        this.props.deleteRentalReport(this.onDeleteReportSuccess, this.onDeleteReportFailure, this.props.reportId);
     };
 
     render() {
@@ -63,7 +74,7 @@ class PreviousReportCard extends Component<Props> {
                     <Col span={2}>
                         <Popconfirm
                             title="Are you sure delete this report?"
-                            onConfirm={this.confirmDeleteRentalReport}
+                            onConfirm={this.onConfirmDeleteReport}
                             okText="Yes"
                             cancelText="No"
                         >
@@ -78,4 +89,19 @@ class PreviousReportCard extends Component<Props> {
     }
 }
 
-export default PreviousReportCard;
+interface Dispatch {
+    deleteRentalReport: any;
+}
+
+
+const mapDispatchToProps = (dispatch): Dispatch => {
+    return {
+        deleteRentalReport: (onSuccess, onFailure, reportId) => {
+            dispatch(deleteReport(onSuccess, onFailure, reportId));
+        },
+    };
+};
+
+export default connect(null, mapDispatchToProps)(PreviousReportCard);
+
+

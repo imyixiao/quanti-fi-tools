@@ -24,6 +24,17 @@ export async function saveReport(idToken: string, reportInfo) {
     });
 }
 
+export async function deleteReport(idToken: string, reportId: string) {
+    const deleteReportUrl = serverURL + '/delete-rental-report';
+    return axios(deleteReportUrl, {
+        method: 'post',
+        data: {
+            reportId,
+            idToken,
+        },
+    });
+}
+
 export async function fetchDefaultStrategy(idToken: string) {
     const url = serverURL + '/fetch-default-strategy';
     return axios(url, {
