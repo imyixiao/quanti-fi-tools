@@ -15,6 +15,7 @@ export const SAVE_REPORT_FAILED = setBudgetNamespace('SAVE_REPORT_FAILED');
 export const FETCH_BUDGET_REPORTS = setBudgetNamespace('FETCH_BUDGET_REPORTS');
 export const FETCH_BUDGET_REPORTS_SUCCEEDED = setBudgetNamespace('FETCH_BUDGET_REPORTS_SUCCEEDED');
 export const FETCH_BUDGET_REPORTS_FAILED = setBudgetNamespace('FETCH_BUDGET_REPORTS_FAILED');
+export const DELETE_REPORT = setBudgetNamespace('DELETE_REPORT');
 
 export const POPULATE_BUDGET_CARD = setBudgetNamespace('POPULATE_BUDGET_CARD');
 export const POPULATE_BUDGET_CARD_ASYNC = setBudgetNamespace('POPULATE_BUDGET_CARD_ASYNC');
@@ -46,6 +47,10 @@ export const setMonthlyExpenses = expenses => ({
 
 export const saveNewReport = (onSuccess, onFailure, reportInfo) => {
     return { type: SAVE_REPORT, payload: { onSuccess, onFailure, reportInfo } };
+};
+
+export const deleteReport = (onSuccess, onFailure, reportId) => {
+    return { type: DELETE_REPORT, payload: { onSuccess, onFailure, reportId } };
 };
 
 export const fetchBudgetReports = (ids?: string[]) => ({

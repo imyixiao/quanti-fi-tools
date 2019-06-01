@@ -23,3 +23,14 @@ export async function saveReport(idToken: string, reportInfo) {
         },
     });
 }
+
+export async function deleteReport(idToken: string, reportId: string) {
+    const deleteReportUrl = serverURL + '/delete-budget-report';
+    return axios(deleteReportUrl, {
+        method: 'post',
+        data: {
+            reportId,
+            idToken,
+        },
+    });
+}
